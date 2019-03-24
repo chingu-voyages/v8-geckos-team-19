@@ -1,10 +1,12 @@
 import React from "react";
 import styled from "styled-components";
+import { fadeZoomIn } from '../../UI/animations';
 
 const Svg = styled.svg`
     position: absolute;
     top: 0%;
     left: 0%;
+    animation: ${fadeZoomIn} 0.3s ease-in-out;
 `;
 
 export default props => {

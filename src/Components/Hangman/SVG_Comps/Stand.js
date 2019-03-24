@@ -1,7 +1,9 @@
 import React from "react";
 import styled from "styled-components";
+import { fadeZoomIn } from '../../UI/animations';
 
 const Svg = styled.svg`
+    animation: ${fadeZoomIn} 0.3s ease-in-out;
     /* position: absolute; */
     /* left: -500%; */
     /* top: -500%; */

@@ -8,6 +8,7 @@ import LeftArm from "../../Components/Hangman/SVG_Comps/LeftArm";
 import RightArm from "../../Components/Hangman/SVG_Comps/RightArm";
 import LeftLeg from "../../Components/Hangman/SVG_Comps/LeftLeg";
 import RightLeg from "../../Components/Hangman/SVG_Comps/RightLeg";
+import Button from "../../Components/UI/Button";
 
 const MainWindow = styled.div`
     display: flex;
@@ -23,19 +24,34 @@ export default class extends Component {
         guessNr: 0
     }
 
+    btnHandler = () => {
+        if (this.state.guessNr < 8) {
+            this.setState(prevState => ({guessNr: prevState.guessNr + 1}))
+        } else {
+            this.setState({guessNr: 0})
+        }
+    }
+
     render() {
+        const {guessNr} = this.state;
         return (
             <MainWindow>
-                <div style={{position: 'relative', border: '1px solid red'}}>
-                    <Stand />
-                    <Noose />
-                    <Head />
-                    <Body />
-                    <LeftArm />
-                    <RightArm />
-                    <LeftLeg/>
-                    <RightLeg/>
+                <div style={{position: 'relative'}}>
+                    {guessNr >= 1 && <Stand />}
+                    {guessNr >= 2 && <Noose />}
+                    {guessNr >= 3 && <Head />}
+                    {guessNr >= 4 && <Body />}
+                    {guessNr >= 5 && <LeftArm />}
+                    {guessNr >= 6 && <RightArm />}
+                    {guessNr >= 7 && <LeftLeg/>}
+                    {guessNr >= 8 && <RightLeg/>}
                 </div>
+                <Button
+                    style={{marginTop: '50px'}}
+                    onClick={this.btnHandler}
+                >
+                    Next
+                </Button>
             </MainWindow>
         )
     }
