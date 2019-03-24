@@ -1,25 +1,33 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import Keyboard from 'react-simple-keyboard';
+import 'react-simple-keyboard/build/css/index.css';
 
 class App extends Component {
+  onChange = (input) => {
+    console.log("Input changed", input);
+  }
+
+  onKeyPress = (button) => {
+    console.log("Button pressed", button);
+  }
+
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+        <Keyboard
+          onChange={input =>
+            this.onChange(input)}
+          onKeyPress={button =>
+            this.onKeyPress(button)}
+          layout={{
+            'default': [
+              'q w e r t y u i o p',
+              'a s d f g h j k l',
+              'z x c v b n m'
+            ]
+          }}
+        />
       </div>
     );
   }
