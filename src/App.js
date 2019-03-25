@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Hangman from "./Containers/Hangman/Hangman";
+import Hangman from "./Containers/Hangman";
 // import logo from './logo.svg';
 // import './App.css';
 

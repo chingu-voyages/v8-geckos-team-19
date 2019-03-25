@@ -1,14 +1,14 @@
 import React, {Component} from "react";
 import styled from "styled-components";
-import Stand from "../../Components/Hangman/SVG_Comps/Stand";
-import Noose from "../../Components/Hangman/SVG_Comps/Noose";
-import Head from "../../Components/Hangman/SVG_Comps/Head";
-import Body from "../../Components/Hangman/SVG_Comps/Body";
-import LeftArm from "../../Components/Hangman/SVG_Comps/LeftArm";
-import RightArm from "../../Components/Hangman/SVG_Comps/RightArm";
-import LeftLeg from "../../Components/Hangman/SVG_Comps/LeftLeg";
-import RightLeg from "../../Components/Hangman/SVG_Comps/RightLeg";
-import Button from "../../Components/UI/Button";
+import Stand from "../Components/Hangman/SVG_Comps/Stand";
+import Noose from "../Components/Hangman/SVG_Comps/Noose";
+import Head from "../Components/Hangman/SVG_Comps/Head";
+import Body from "../Components/Hangman/SVG_Comps/Body";
+import LeftArm from "../Components/Hangman/SVG_Comps/LeftArm";
+import RightArm from "../Components/Hangman/SVG_Comps/RightArm";
+import LeftLeg from "../Components/Hangman/SVG_Comps/LeftLeg";
+import RightLeg from "../Components/Hangman/SVG_Comps/RightLeg";
+import Button from "../Shared/UI/Button";
 
 const MainWindow = styled.div`
     display: flex;
@@ -36,7 +36,7 @@ export default class extends Component {
         const {guessNr} = this.state;
         return (
             <MainWindow>
-                <div style={{position: 'relative'}}>
+                <div style={{position: 'relative', width: '371px', height: '500px'}}>
                     {guessNr >= 1 && <Stand />}
                     {guessNr >= 2 && <Noose />}
                     {guessNr >= 3 && <Head />}
