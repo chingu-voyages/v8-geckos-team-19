@@ -11,4 +11,4 @@ const AnimImg = styled.img`
     animation: ${props => props.anim} 0.6s ease-out both;
 `;
 
-export default ({src, anim}) => <AnimImg src={src} anim={rollIn} />
+export default ({src}) => <AnimImg src={src} anim={rollIn} />

@@ -9,6 +9,7 @@ import RightArm from "../Components/Hangman/SVG_Comps/RightArm";
 import LeftLeg from "../Components/Hangman/SVG_Comps/LeftLeg";
 import RightLeg from "../Components/Hangman/SVG_Comps/RightLeg";
 import Button from "../Shared/UI/Button";
+import notepaperImg from "../Assets/Images/note-paper-optimised.svg";
 
 const MainWindow = styled.div`
     display: flex;
@@ -17,6 +18,8 @@ const MainWindow = styled.div`
     justify-content: center;
     width: 100%;
     height: 100vh;
+    background: url(${notepaperImg}) no-repeat center;
+    background-size: 90%;
 `
 
 export default class extends Component {
