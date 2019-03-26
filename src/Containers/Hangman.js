@@ -39,6 +39,7 @@ export default class extends Component {
         const {guessNr} = this.state;
         return (
             <MainWindow>
+                <h1 style={{fontSize: '5rem'}}>Hangman</h1>
                 <div style={{position: 'relative', width: '371px', height: '500px'}}>
                     {guessNr >= 1 && <Stand />}
                     {guessNr >= 2 && <Noose />}
