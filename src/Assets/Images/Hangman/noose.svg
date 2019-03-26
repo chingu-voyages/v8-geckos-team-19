@@ -1,14 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg width="479px" height="646px" viewBox="0 0 479 646" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: Sketch 51.2 (57519) - http://www.bohemiancoding.com/sketch -->
-    <title>Noose</title>
-    <desc>Created with Sketch.</desc>
-    <defs></defs>
-    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="Noose" fill-rule="nonzero">
-            <rect id="Container" fill-opacity="0" fill="#D8D8D8" x="0" y="0" width="479" height="646"></rect>
-            <path d="M323.5,116.5 L323.5,36.5" id="Line-2" stroke="#0047ba" stroke-width="8" stroke-linecap="square"></path>
-            <path d="M322.5,36.5 L80,36.5" id="Line-4" stroke="#0047ba" stroke-width="8" stroke-linecap="square"></path>
-        </g>
-    </g>
+<svg xmlns="http://www.w3.org/2000/svg" width="479" height="646" version="1">
+  <g fill="none" fill-rule="evenodd">
+    <path fill="none" d="M0 0h479v646H0z"/>
+    <path stroke="#0047ba" stroke-width="8" d="M322 43c-70-5-143-4-241-5m240 7c-65-6-128-6-240-4"/>
+    <path stroke="#0047ba" stroke-width="8" d="M319 115l-2-78m2 78c1-17-1-33-1-79"/>
+  </g>
 </svg>

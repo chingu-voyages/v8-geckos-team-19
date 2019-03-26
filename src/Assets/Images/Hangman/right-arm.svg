@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg width="479px" height="646px" viewBox="0 0 479 646" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: Sketch 51.2 (57519) - http://www.bohemiancoding.com/sketch -->
-    <title>RightArm</title>
-    <desc>Created with Sketch.</desc>
-    <defs></defs>
-    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="RightArm" fill-rule="nonzero">
-            <rect id="Container" fill-opacity="0" fill="#D8D8D8" x="0" y="0" width="479" height="646"></rect>
-            <path d="M447,267 L325,345" id="Right-Arm" stroke="#0047ba" stroke-width="8" stroke-linecap="square" transform="translate(386.000000, 306.000000) scale(-1, 1) translate(-386.000000, -306.000000) "></path>
-        </g>
+<svg xmlns="http://www.w3.org/2000/svg" width="479" height="646" version="1">
+  <g fill="none" fill-rule="evenodd">
+    <path fill="none" d="M0 0h479v646H0z"/>
+    <g stroke="#0047ba" stroke-width="8">
+      <path d="M416 370c14 5 28 4 32-4m-33 3c15 6 28 5 33-5m0 1c4-9-4-20-17-27m17 25c5-6-4-18-18-26m0 0c-13-6-26-3-32 5m32-5c-13-5-27-4-32 5m0 0c-3 9 5 21 18 28m-17-29c-5 10 4 21 17 27m0 0v2m0-2v2"/>
+      <path d="M322 275c40 25 83 54 103 69m-104-70l106 71"/>
     </g>
+  </g>
 </svg>

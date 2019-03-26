@@ -115,3 +115,14 @@ export const rollIn = keyframes`
         opacity: 1;
     }
 `
+
+export const scaleIn = keyframes`
+    0% {
+        transform: scale(0);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+`

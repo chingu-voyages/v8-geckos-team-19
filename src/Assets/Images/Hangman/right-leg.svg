@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg width="479px" height="646px" viewBox="0 0 479 646" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: Sketch 51.2 (57519) - http://www.bohemiancoding.com/sketch -->
-    <title>RightLeg</title>
-    <desc>Created with Sketch.</desc>
-    <defs></defs>
-    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="RightLeg" fill-rule="nonzero">
-            <rect id="Container" fill-opacity="0" fill="#D8D8D8" x="0" y="0" width="479" height="646"></rect>
-            <path d="M448,465 L326,543" id="Right-Leg" stroke="#0047ba" stroke-width="8" stroke-linecap="square" transform="translate(387.000000, 504.000000) scale(-1, 1) translate(-387.000000, -504.000000) "></path>
-        </g>
+<svg xmlns="http://www.w3.org/2000/svg" width="479" height="646" version="1">
+  <g fill="none" fill-rule="evenodd">
+    <path fill="none" d="M0 0h479v646H0z"/>
+    <g stroke="#0047ba" stroke-width="8">
+      <path d="M448 532c3-14 0-28-9-31m9 32c4-15 1-29-10-31m1-1c-9-3-20 7-24 21m22-20c-7-5-17 6-23 21m0 0c-3 14 1 27 10 31m-10-31c-3 14 0 28 10 31m0 0c10 1 20-8 24-22m-25 22c10 2 20-8 24-22m0 0h1m-1 0h1"/>
+      <path d="M322 428c37 37 73 78 99 108m-97-109l98 108"/>
     </g>
+  </g>
 </svg>
