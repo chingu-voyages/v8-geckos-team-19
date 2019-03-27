@@ -46,7 +46,7 @@ const KeybWordWindow = styled(DrawingWindow)`
 // This is just a temporary component to
 // show the stubs and will be deleted later
 const Stub = styled.h1`
-    padding: 50px;
+    padding: 20px;
     background-color: rgba(255, 81, 98, 0.5);
     border-radius: 20px;
 `
@@ -62,6 +62,39 @@ export default class extends Component {
         } else {
             this.setState({guessNr: 0})
         }
+    }
+
+    componentDidMount() {
+        // Pre-loading svg images
+        let imgArray = [];
+        const imgSrcArray = [
+            standSvg,
+            nooseSvg,
+            headSvg,
+            bodySvg,
+            leftLegSvg,
+            leftArmSvg,
+            rightArmSvg,
+            leftLegSvg,
+            rightLegSvg,
+            eyesSvg
+        ];
+        let i = 0;
+        for (i = 0; i < imgSrcArray.length; i++) {
+            imgArray[i] = new Image();
+            imgArray[i].src = imgSrcArray[i];
+        }
+        // Initial Animation
+        setTimeout(() => {
+            this.interval = setInterval(() => {
+                if (this.state.guessNr < 9) {
+                    this.setState(prevState => ({guessNr: prevState.guessNr + 1}));
+                } else {
+                    clearInterval(this.interval);
+                    setTimeout(() => this.setState({guessNr: 0}), 1000);
+                }
+            }, 100)
+        }, 1000)
     }
 
     render() {
