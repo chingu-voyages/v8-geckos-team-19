@@ -4,14 +4,12 @@ const Button = styled.button.attrs({
     type: "button"
 }
 )`
-    /* display: block; */
     padding: 15px;
     border-radius: 12px;
     background-color: #3e70c1;
     outline: none;
     color: white;
     font-size: 1.3rem;
-    /* font-weight: bold; */
     box-shadow: none;
     border: none;
     cursor: pointer;

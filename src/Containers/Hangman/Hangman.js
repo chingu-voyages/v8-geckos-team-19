@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import styled from "styled-components";
+import styled, {css} from "styled-components";
 import standSvg from "../../Assets/Images/Hangman/stand.svg";
 import nooseSvg from "../../Assets/Images/Hangman/noose.svg";
 import headSvg from "../../Assets/Images/Hangman/head.svg";
@@ -11,16 +11,13 @@ import rightLegSvg from "../../Assets/Images/Hangman/right-leg.svg";
 import eyesSvg from "../../Assets/Images/Hangman/eyes.svg";
 import BodyPart from "../../Components/Hangman/SVG_Comps/BodyPart"
 import Button from "../../Shared/UI/Button";
-// import notepaperImg from "../../Assets/Images/note-paper-optimised.svg";
+import {slideOutBlurredTop, vibrate} from "../../Shared/animations";
 
 const GameWrapper = styled.div`
     display: flex;
-    /* flex-flow: column; */
     align-items: center;
     justify-content: center;
     width: 100%;
-    /* height: 100vh; */
-    /* padding: 50px; */
     box-sizing: border-box;
 `
 
@@ -31,6 +28,18 @@ const DrawingWindow = styled.div`
     border: 2px solid #0047ba;
     border-radius: 20px;
     margin: 50px;
+`
+
+const GroupForAnim = styled.div`
+    display: block;
+    width: 371px;
+    height: 500px;
+    ${props => props.animAttention
+        ? css`animation: ${vibrate} 0.5s linear infinite both;`
+        : null}
+    ${props => props.animExit
+        ? css`animation: ${slideOutBlurredTop} 0.45s cubic-bezier(0.755, 0.050, 0.855, 0.060) both;`
+        : null}
 `
 
 const KeybWordWindow = styled(DrawingWindow)`
@@ -53,7 +62,9 @@ const Stub = styled.h1`
 
 export default class extends Component {
     state={
-        guessNr: 0
+        guessNr: 0,
+        animExit: false,
+        animAttention: false
     }
 
     btnHandler = () => {
@@ -65,25 +76,6 @@ export default class extends Component {
     }
 
     componentDidMount() {
-        // Pre-loading svg images
-        let imgArray = [];
-        const imgSrcArray = [
-            standSvg,
-            nooseSvg,
-            headSvg,
-            bodySvg,
-            leftLegSvg,
-            leftArmSvg,
-            rightArmSvg,
-            leftLegSvg,
-            rightLegSvg,
-            eyesSvg
-        ];
-        let i = 0;
-        for (i = 0; i < imgSrcArray.length; i++) {
-            imgArray[i] = new Image();
-            imgArray[i].src = imgSrcArray[i];
-        }
         // Initial Animation
         setTimeout(() => {
             this.interval = setInterval(() => {
@@ -91,28 +83,39 @@ export default class extends Component {
                     this.setState(prevState => ({guessNr: prevState.guessNr + 1}));
                 } else {
                     clearInterval(this.interval);
-                    setTimeout(() => this.setState({guessNr: 0}), 1000);
+                    setTimeout(() => this.setState({animExit: true}), 2000); 
+                    setTimeout(() => this.setState({guessNr: 0, animExit: false}), 3000);
                 }
             }, 100)
         }, 1000)
     }
 
     render() {
-        const {guessNr} = this.state;
+        const {guessNr, animExit} = this.state;
+        
+        const imgSrcArray = [
+            standSvg,
+            nooseSvg,
+            headSvg,
+            bodySvg,
+            leftArmSvg,
+            rightArmSvg,
+            leftLegSvg,
+            rightLegSvg,
+            eyesSvg
+        ];
+
         return (
             <>
             <h1 style={{fontSize: '4rem', textDecoration: 'underline', color: '#0047ba', textAlign: 'center'}}>Hangman</h1>
             <GameWrapper>
-                <DrawingWindow>
-                    {guessNr >= 1 && <BodyPart src={standSvg} />}
-                    {guessNr >= 2 && <BodyPart src={nooseSvg} />}
-                    {guessNr >= 3 && <BodyPart src={headSvg} />}
-                    {guessNr >= 4 && <BodyPart src={bodySvg} />}
-                    {guessNr >= 5 && <BodyPart src={leftArmSvg} />}
-                    {guessNr >= 6 && <BodyPart src={rightArmSvg} />}
-                    {guessNr >= 7 && <BodyPart src={leftLegSvg} />}
-                    {guessNr >= 8 && <BodyPart src={rightLegSvg} />}
-                    {guessNr >= 9 && <BodyPart src={eyesSvg} />}
+                <DrawingWindow >
+                    {guessNr === 0 && <h2 style={{marginTop: '50%', textAlign: 'center'}}>Choose your first letter</h2>}
+                    <GroupForAnim animExit={animExit} animAttention={guessNr === 9}>
+                        {imgSrcArray.map((part, idx) =>
+                            <BodyPart key={idx} src={part} display={guessNr >= idx + 1? "block": "none"}/>
+                            )}
+                    </GroupForAnim>
                 </DrawingWindow>
                 <KeybWordWindow>
                     <Stub>Word Component - Stub</Stub>

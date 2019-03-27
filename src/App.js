@@ -1,9 +1,8 @@
 import React, { Component } from "react";
 import Hangman from "./Containers/Hangman/Hangman";
-import { createGlobalStyle } from "styled-components";
+import { css, createGlobalStyle } from "styled-components";
 import notepaperImg from "./Assets/Images/note-paper-optimised.svg";
-// import logo from './logo.svg';
-// import './App.css';
+import { fadeZoomIn } from './Shared/animations';
 
 const GlobalStyle = createGlobalStyle`
     body {
@@ -11,23 +10,37 @@ const GlobalStyle = createGlobalStyle`
         background-color: teal;
         background-size: 95%;
         font-family: 'Indie Flower', cursive;
+        ${props => props.pageReady
+            ? css`animation: ${fadeZoomIn} 0.3s ease-out;`
+            : null}
     }
 `;
 
 class App extends Component {
     state = {
-        activeDisplay: "hangman" // possible states: mainMenu / hangman / trivia / snake
+        activeDisplay: "hangman", // possible states: mainMenu / hangman / trivia / snake
+        pageReady: false
     };
 
-    render() {
-        const { activeDisplay } = this.state;
+componentDidMount() {
+    const img = new Image();
+    img.src = notepaperImg;
+    img.onload = () => this.setState({pageReady: true});
+}
 
-        return (
-            <>
-            <GlobalStyle/>
-            {activeDisplay === "hangman" && <Hangman />}
-            </>
-        );
+    render() {
+        const { activeDisplay, pageReady } = this.state;
+
+        if (pageReady) {
+            return (
+                <>
+                <GlobalStyle pageReady={pageReady}/>
+                {activeDisplay === "hangman" && <Hangman />}
+                </>
+            );
+        } else {
+            return <h1>Loading</h1>
+        }
     }
 }
 

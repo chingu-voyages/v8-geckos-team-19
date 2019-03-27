@@ -126,3 +126,65 @@ export const scaleIn = keyframes`
         opacity: 1;
     }
 `
+export const puffOut = keyframes`
+    0% {
+        transform: scale(1);
+        filter: blur(0px);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(2);
+        filter: blur(2px);
+        opacity: 0;
+    }
+`
+
+export const slideOutBlurredTop = keyframes`
+    0% {
+        transform: translateY(0) scaleY(1) scaleX(1);
+        transform-origin: 50% 0%;
+        filter: blur(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-1000px) scaleY(2) scaleX(0.2);
+        transform-origin: 50% 0%;
+        filter: blur(40px);
+        opacity: 0;
+    }
+`
+export const vibrate = keyframes`
+    0% {
+        transform: translate(0);
+    }
+    10% {
+        transform: translate(-2px, -2px);
+    }
+    20% {
+        transform: translate(2px, -2px);
+    }
+    30% {
+        transform: translate(-2px, 2px);
+    }
+    40% {
+        transform: translate(2px, 2px);
+    }
+    50% {
+        transform: translate(-2px, -2px);
+    }
+    60% {
+        transform: translate(2px, -2px);
+    }
+    70% {
+        transform: translate(-2px, 2px);
+    }
+    80% {
+        transform: translate(-2px, -2px);
+    }
+    90% {
+        transform: translate(2px, -2px);
+    }
+    100% {
+        transform: translate(0);
+    }
+    `
