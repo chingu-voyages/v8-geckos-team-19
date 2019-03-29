@@ -4,14 +4,15 @@ const Button = styled.button.attrs({
     type: "button"
 }
 )`
-    padding: 15px;
-    border-radius: 12px;
-    background-color: #3e70c1;
+    padding: 8px;
+    border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+    background-color: rgba(255,255,255,0.40);
     outline: none;
-    color: white;
+    color: #3e70c1;
     font-size: 1.3rem;
+    font-family: inherit;
     box-shadow: none;
-    border: none;
+    border: 2px solid #3e70c1;
     cursor: pointer;
     &:hover {
         transform: scale(1.05);

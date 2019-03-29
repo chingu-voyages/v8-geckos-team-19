@@ -23,15 +23,20 @@ const GameWrapper = styled.div`
 
 const DrawingWindow = styled.div`
     position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 371px;
     height: 500px;
-    border: 2px solid #0047ba;
-    border-radius: 20px;
+    border: 4px solid ${props => props.color};
+    /* border-radius: 20px; */
+    border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
     margin: 50px;
+    box-sizing: border-box;
 `
 
 const GroupForAnim = styled.div`
-    display: block;
+    display: ${props => props.display};
     width: 371px;
     height: 500px;
     ${props => props.animAttention
@@ -43,13 +48,10 @@ const GroupForAnim = styled.div`
 `
 
 const KeybWordWindow = styled(DrawingWindow)`
-    display: flex;
     flex-flow: column;
-    align-items: center;
     justify-content: space-evenly;
     width: 500px;
     padding: 15px;
-    box-sizing: border-box;
 `
 
 // This is just a temporary component to
@@ -107,17 +109,17 @@ export default class extends Component {
 
         return (
             <>
-            <h1 style={{fontSize: '4rem', textDecoration: 'underline', color: '#0047ba', textAlign: 'center'}}>Hangman</h1>
+            <h1 style={{fontSize: '4rem', textDecoration: 'underline', color: '#0047ba', textAlign: 'center', width: '100%'}}>Hangman</h1>
             <GameWrapper>
-                <DrawingWindow >
-                    {guessNr === 0 && <h2 style={{marginTop: '50%', textAlign: 'center'}}>Choose your first letter</h2>}
-                    <GroupForAnim animExit={animExit} animAttention={guessNr === 9}>
+                <DrawingWindow color={guessNr === 9? "red": "#0047ba"}>
+                    {guessNr === 0 && <h2>Choose your first letter</h2>}
+                    <GroupForAnim animExit={animExit} animAttention={guessNr === 9} display={guessNr === 0? "none": "block"}>
                         {imgSrcArray.map((part, idx) =>
                             <BodyPart key={idx} src={part} display={guessNr >= idx + 1? "block": "none"}/>
                             )}
                     </GroupForAnim>
                 </DrawingWindow>
-                <KeybWordWindow>
+                <KeybWordWindow color="#0047ba">
                     <Stub>Word Component - Stub</Stub>
                     <Stub>Diana's Keyboard Component - Stub</Stub>
                 <Button
