@@ -12,6 +12,8 @@ import eyesSvg from "../../Assets/Images/Hangman/eyes.svg";
 import BodyPart from "../../Components/Hangman/SVG_Comps/BodyPart"
 import Button from "../../Shared/UI/Button";
 import {slideOutBlurredTop, vibrate} from "../../Shared/animations";
+import axios from 'axios';
+import WordComp from "../../Components/Hangman/WordComp";
 
 const GameWrapper = styled.div`
     display: flex;
@@ -66,7 +68,10 @@ export default class extends Component {
     state={
         guessNr: 0,
         animExit: false,
-        animAttention: false
+        animAttention: false,
+        randomWord: null,
+        fetchError: null,
+        round: 1,
     }
 
     btnHandler = () => {
@@ -75,6 +80,16 @@ export default class extends Component {
         } else {
             this.setState({guessNr: 0})
         }
+    }
+
+    fetchRandomWord = () => {
+        axios.get(
+            'http://api.wordnik.com/v4/words.json/randomWord?hasDictionaryDef=true&minLength=4'+
+            '&maxLength=10&api_key=b58be748b0cd0e255900b0e5b2a0bb941838def7258c93a0b'
+            )
+            .then(res => this.setState({randomWord: res.data}))
+            // .then(res => console.log(res.data))
+            .catch(err => this.setState({fetchError: err}))
     }
 
     componentDidMount() {
@@ -90,10 +105,11 @@ export default class extends Component {
                 }
             }, 100)
         }, 1000)
+        this.fetchRandomWord();
     }
 
     render() {
-        const {guessNr, animExit} = this.state;
+        const {guessNr, animExit, randomWord, fetchError, round} = this.state;
         
         const imgSrcArray = [
             standSvg,
@@ -120,7 +136,8 @@ export default class extends Component {
                     </GroupForAnim>
                 </DrawingWindow>
                 <KeybWordWindow color="#0047ba">
-                    <Stub>Word Component - Stub</Stub>
+                    {randomWord && <WordComp word={randomWord} />}
+                    {/* <Stub>Word Component - Stub</Stub> */}
                     <Stub>Diana's Keyboard Component - Stub</Stub>
                 <Button
                     onClick={this.btnHandler}
