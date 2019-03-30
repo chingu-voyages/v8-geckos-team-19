@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="479" height="646" version="1">
+  <g fill="none" fill-rule="evenodd">
+    <path fill="none" d="M0 0h479v646H0z"/>
+    <path stroke="#0047ba" stroke-width="8" d="M80 613c0-161 0-326 5-573m-2 574c-3-183-2-367 1-572"/>
+    <path stroke="#0047ba" stroke-width="8" d="M19 607c30 11 63-7 120 3m-122 4c40-7 80-7 124-10"/>
+  </g>
+</svg>

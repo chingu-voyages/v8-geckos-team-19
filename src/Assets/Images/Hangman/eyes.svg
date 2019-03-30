@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="479" height="646" version="1">
+  <g fill="none" fill-rule="evenodd">
+    <path fill="none" d="M0 0h479v646H0z"/>
+    <g stroke="#0047ba" stroke-width="4">
+      <path d="M288 145c6 7 14 14 18 21m-16-20l17 21"/>
+      <path d="M307 145c-6 8-12 16-18 21m18-19l-19 20"/>
+    </g>
+    <g stroke="#0047ba" stroke-width="4">
+      <path d="M332 145c6 7 14 14 18 21m-16-20l17 21"/>
+      <path d="M351 145c-6 8-12 16-18 21m18-19l-19 20"/>
+    </g>
+  </g>
+</svg>
