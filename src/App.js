@@ -22,11 +22,19 @@ class App extends Component {
         pageReady: false
     };
 
-componentDidMount() {
-    const img = new Image();
-    img.src = notepaperImg;
-    img.onload = () => this.setState({pageReady: true});
-}
+    onChange = (input) => {
+      console.log("Input changed", input);
+    }
+  
+    onKeyPress = (button) => {
+      console.log("Button pressed", button);
+    }
+
+    componentDidMount() {
+        const img = new Image();
+        img.src = notepaperImg;
+        img.onload = () => this.setState({pageReady: true});
+    }
 
     render() {
         const { activeDisplay, pageReady } = this.state;

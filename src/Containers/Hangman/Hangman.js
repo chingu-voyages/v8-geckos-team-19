@@ -12,6 +12,7 @@ import eyesSvg from "../../Assets/Images/Hangman/eyes.svg";
 import BodyPart from "../../Components/Hangman/SVG_Comps/BodyPart"
 import Button from "../../Shared/UI/Button";
 import {slideOutBlurredTop, vibrate} from "../../Shared/animations";
+import Keyboard from 'react-simple-keyboard';
 
 const GameWrapper = styled.div`
     display: flex;
@@ -121,7 +122,20 @@ export default class extends Component {
                 </DrawingWindow>
                 <KeybWordWindow color="#0047ba">
                     <Stub>Word Component - Stub</Stub>
-                    <Stub>Diana's Keyboard Component - Stub</Stub>
+                    <Keyboard
+                        onChange={input =>
+                            this.onChange(input)}
+                        onKeyPress={button =>
+                            this.onKeyPress(button)}
+                        layoutName={'letters'}
+                        layout={{
+                            'letters': [
+                            'q w e r t y u i o p',
+                            'a s d f g h j k l',
+                            'z x c v b n m'
+                            ]
+                        }}
+                    />
                 <Button
                     onClick={this.btnHandler}
                 >
