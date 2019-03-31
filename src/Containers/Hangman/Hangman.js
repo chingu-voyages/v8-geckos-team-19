@@ -14,6 +14,7 @@ import Button from "../../Shared/UI/Button";
 import {slideOutBlurredTop, vibrate} from "../../Shared/animations";
 import axios from 'axios';
 import WordComp from "../../Components/Hangman/WordComp";
+import KeyboardComp from "../../Components/Hangman/KeyboardComp";
 
 const GameWrapper = styled.div`
     display: flex;
@@ -35,6 +36,7 @@ const DrawingWindow = styled.div`
     border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
     margin: 50px;
     box-sizing: border-box;
+    background-color: rgba(233, 135, 255, 0.5);
 `
 
 const GroupForAnim = styled.div`
@@ -54,6 +56,7 @@ const KeybWordWindow = styled(DrawingWindow)`
     justify-content: space-evenly;
     width: 500px;
     padding: 15px;
+    background-color: rgba(227, 255, 135, 0.5);
 `
 
 // This is just a temporary component to
@@ -138,7 +141,8 @@ export default class extends Component {
                 <KeybWordWindow color="#0047ba">
                     {randomWord && <WordComp word={randomWord} />}
                     {/* <Stub>Word Component - Stub</Stub> */}
-                    <Stub>Diana's Keyboard Component - Stub</Stub>
+                    {/* <Stub>Diana's Keyboard Component - Stub</Stub> */}
+                    <KeyboardComp/>
                 <Button
                     onClick={this.btnHandler}
                 >
