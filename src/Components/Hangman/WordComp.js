@@ -14,18 +14,15 @@ const CharBox = styled.div`
     width: 2rem;
     height: 2rem;
     border-bottom: 4px solid #0047ba;
-    /* border-radius: 3px; */
     font-size: 1.5rem;
     font-weight: bold;
-    /* background-color: ${props => props.bgcolor || 'inherit'}; */
 `
 
 const Char = styled.span`
-    /* visibility: ${props => props.visibility || 'show'}; */
     display: ${props => props.display};
 `
 
-export default ({word}) => {
+export default ({word, lettersGuessed}) => {
 
     const charArray = word.word.split("")
 
@@ -33,7 +30,7 @@ export default ({word}) => {
         <Container>
             {charArray.map((char, idx) => (
                 <CharBox key={idx} bgcolor="black">
-                    <Char display="show">{char}</Char>
+                    <Char display={lettersGuessed.has(char)? 'show': 'none'}>{char}</Char>
                 </CharBox>
             ))}
         </Container>
