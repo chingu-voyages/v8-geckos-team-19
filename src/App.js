@@ -22,14 +22,6 @@ class App extends Component {
         pageReady: false
     };
 
-    onChange = (input) => {
-      console.log("Input changed", input);
-    }
-  
-    onKeyPress = (button) => {
-      console.log("Button pressed", button);
-    }
-
     componentDidMount() {
         const img = new Image();
         img.src = notepaperImg;
