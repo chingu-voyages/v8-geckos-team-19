@@ -11,7 +11,7 @@ import rightLegSvg from "../../Assets/Images/Hangman/right-leg.svg";
 import eyesSvg from "../../Assets/Images/Hangman/eyes.svg";
 import BodyPart from "../../Components/Hangman/SVG_Comps/BodyPart"
 import Button from "../../Shared/UI/Button";
-import {slideOutBlurredTop, vibrate} from "../../Shared/animations";
+import {slideOutBlurredTop, vibrate, spin360, fadeZoomIn} from "../../Shared/animations";
 import axios from 'axios';
 import WordComp from "../../Components/Hangman/WordComp";
 import KeyboardComp from "../../Components/Hangman/KeyboardComp";
@@ -37,6 +37,7 @@ const DrawingWindow = styled.div`
     margin: 50px;
     box-sizing: border-box;
     background-color: ${props => props.bgColor};
+    overflow: hidden;
 `
 
 const GroupForAnim = styled.div`
@@ -58,6 +59,18 @@ const KeybWordWindow = styled(DrawingWindow)`
     padding: 15px;
     background-color: rgba(227, 255, 135, 0.5);
 `
+
+const LoadingAnim = styled.h1`
+    animation: ${spin360} 0.5s cubic-bezier(0.455, 0.030, 0.515, 0.955) both infinite;
+`
+
+const WonImg = styled.img`
+    display: block;
+    height: 100%;
+    object-fit: cover;
+    animation: ${fadeZoomIn} 0.3s ease-in;
+`
+
 export default class extends Component {
     state={
         wrongGuessNr: 0,
@@ -69,7 +82,8 @@ export default class extends Component {
         fetchError: null,
         round: 1,
         lettersGuessed: new Set(),
-        gameState: 'playing'
+        gameState: 'playing',
+        loading: false,
     }
 
     btnHandler = () => {
@@ -84,13 +98,18 @@ export default class extends Component {
     }
 
     fetchRandomWord = async () => {
-        const wordObj =
-            await axios.get('http://api.wordnik.com/v4/words.json/randomWord?hasDictionaryDef=true&minLength=4&maxLength=10&api_key=b58be748b0cd0e255900b0e5b2a0bb941838def7258c93a0b')
-            .catch(err => this.setState({fetchError: err}));
-        const wordDefObj =
-            await axios.get(`https://api.wordnik.com/v4/word.json/${wordObj.data.word}/definitions?limit=200&includeRelated=false&useCanonical=true&includeTags=false&api_key=b58be748b0cd0e255900b0e5b2a0bb941838def7258c93a0b`)
-            .catch(err => this.setState({fetchError: err}));
-        this.setState({randomWord: wordDefObj.data[0]});
+        this.setState({loading: true});
+        const getWordObj = () => axios.get('http://api.wordnik.com/v4/words.json/randomWord?hasDictionaryDef=true&minLength=4&maxLength=10&api_key=b58be748b0cd0e255900b0e5b2a0bb941838def7258c93a0b');
+        const getWordDefObj = (wordObj) => axios.get(`https://api.wordnik.com/v4/word.json/${wordObj.data.word}/definitions?limit=200&includeRelated=false&useCanonical=true&includeTags=false&api_key=b58be748b0cd0e255900b0e5b2a0bb941838def7258c93a0b`)
+        
+        try {
+            const wordObj = await getWordObj();
+            const wordDefObj = await getWordDefObj(wordObj);
+            this.setState({randomWord: wordDefObj.data[0]}, () => this.setState({loading: false}));
+            console.log(wordDefObj.data[0].word)
+        } catch (error) {
+            this.setState({fetchError: error}, () => this.setState({loading: false}))
+        }
     }
 
     handleLetterClick = (letter) => {
@@ -130,7 +149,7 @@ export default class extends Component {
     }
 
     render() {
-        const {wrongGuessNr, animExit, randomWord, fetchError, round, lettersGuessed, gameState, introAnimating} = this.state;
+        const {wrongGuessNr, animExit, randomWord, fetchError, round, lettersGuessed, gameState, introAnimating, loading} = this.state;
         
         const imgSrcArray = [
             standSvg,
@@ -144,33 +163,18 @@ export default class extends Component {
             eyesSvg
         ];
 
-        return (
-            <>
-            <h1 style={{fontSize: '4rem', textDecoration: 'underline', color: '#0047ba', textAlign: 'center', width: '100%'}}>Hangman</h1>
-            <GameWrapper>
-                <DrawingWindow color={wrongGuessNr === 9? "red": "#0047ba"} bgColor={wrongGuessNr === 9? "rgba(255, 0, 0, 0.5)": "rgba(233, 135, 255, 0.5)"}>
-                    {wrongGuessNr === 0 && gameState === 'playing' && <h2>Choose your first letter</h2>}
-                    {gameState === 'won' && <h1>Congratulations! You Won !</h1>}
-                    {gameState !== 'won' &&
-                        <GroupForAnim animExit={animExit} animAttention={wrongGuessNr === 9} display={wrongGuessNr === 0? "none": "block"}>
-                            {imgSrcArray.map((part, idx) =>
-                                <BodyPart key={idx} src={part} display={wrongGuessNr >= idx + 1? "block": "none"}/>
-                                )}
-                        </GroupForAnim>}
-                </DrawingWindow>
-                {!introAnimating && <KeybWordWindow color="#0047ba">
-                    {randomWord &&
-                        <>
-                            <WordComp word={randomWord} lettersGuessed={lettersGuessed}/>
-                            {gameState === 'playing'
-                                ? <KeyboardComp letterClick={this.handleLetterClick} lettersGuessed={lettersGuessed} word={randomWord.word}/>
-                                : <div>
-                                    <h1 style={{color: '#0047ba', textAlign: 'center'}}>{randomWord.word}</h1>
-                                    <h3><span style={{color: '#0047ba'}}>Defenition:&nbsp;</span>{randomWord.text}</h3>
-                                    <p>{`(${randomWord.attributionText})`}</p>
-                                </div>
-                            }
-                        </>
+        let rightWindowDisplay = () => {
+            if (loading) return <LoadingAnim>- Fetching Word -</LoadingAnim>
+            if (randomWord) return (
+                <>
+                    <WordComp word={randomWord} lettersGuessed={lettersGuessed}/>
+                    {gameState === 'playing'
+                        ? <KeyboardComp letterClick={this.handleLetterClick} lettersGuessed={lettersGuessed} word={randomWord.word}/>
+                        : <div>
+                            <h1 style={{color: '#0047ba', textAlign: 'center'}}>{randomWord.word}</h1>
+                            <h3><span style={{color: '#0047ba'}}>Defenition:&nbsp;</span>{randomWord.text}</h3>
+                            <p>{`(${randomWord.attributionText})`}</p>
+                        </div>
                     }
                 {gameState !== 'playing' &&
                     <Button
@@ -178,7 +182,28 @@ export default class extends Component {
                     >
                         Play Again?
                     </Button>}
-                </KeybWordWindow>}
+                </>
+            )
+        }
+
+        return (
+            <>
+            <h1 style={{fontSize: '4rem', textDecoration: 'underline', color: '#0047ba', textAlign: 'center', width: '100%'}}>Hangman</h1>
+            <GameWrapper>
+                <DrawingWindow color={wrongGuessNr === 9? "red": "#0047ba"} bgColor={wrongGuessNr === 9? "rgba(255, 0, 0, 0.5)": "rgba(233, 135, 255, 0.5)"}>
+                    {wrongGuessNr === 0 && gameState === 'playing' && <h2>Choose your first letter</h2>}
+                    {gameState === 'won' && <WonImg alt="confetti" src="https://media.giphy.com/media/s2qXK8wAvkHTO/giphy.gif" />}
+                    {gameState !== 'won' &&
+                        <GroupForAnim animExit={animExit} animAttention={wrongGuessNr === 9} display={wrongGuessNr === 0? "none": "block"}>
+                            {imgSrcArray.map((part, idx) =>
+                                <BodyPart key={idx} src={part} display={wrongGuessNr >= idx + 1? "block": "none"}/>
+                                )}
+                        </GroupForAnim>}
+                </DrawingWindow>
+                {!introAnimating &&
+                    <KeybWordWindow color="#0047ba">
+                        {rightWindowDisplay()}
+                    </KeybWordWindow>}
             </GameWrapper>
             </>
         )
