@@ -10,12 +10,16 @@ export default class extends Component {
             clicked: false,
         }
         this.letterHandler = this.letterHandler.bind(this);
+        this.clickedLetterHandler = this.clickedLetterHandler.bind(this);
     }
 
     letterHandler = e => {
         currentGuess = e.target.getAttribute('data-letter');
         console.log('current guess is: ' + currentGuess);
     };
+
+    clickedLetterHandler = () => this.setState({ clicked: !this.state.clicked })
+    
 
     render() {
         const alphabet = [
@@ -28,16 +32,15 @@ export default class extends Component {
             <Button
                 data-letter={letter} 
                 key={index} 
-                onClick={this.letterHandler}
+                clicked = {this.state.clicked}
+                onClick = {this.clickedLetterHandler}
             >{letter}</Button>
         );
 
         return (
-            <>
-                <div className="keyboard">
-                    {keyboard}
-                </div>
-            </>
+            <div className="keyboard">
+                {keyboard}
+            </div>
         )
     }
 }

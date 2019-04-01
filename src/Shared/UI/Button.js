@@ -8,7 +8,7 @@ const Button = styled.button.attrs({
     border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
     background-color: rgba(255,255,255,0.40);
     outline: none;
-    color: #3e70c1;
+    color: ${props => props.clicked ? 'red' : '#3e70c1'};
     font-size: 1.3rem;
     font-family: inherit;
     box-shadow: none;
