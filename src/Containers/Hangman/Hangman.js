@@ -113,6 +113,13 @@ export default class extends Component {
     }
 
     handleLetterClick = (letter) => {
+        if (typeof letter === 'object') {
+            const keyPressed = letter.key.toLowerCase()
+            const possibleKeys = "qwertyuiopasdfghjklzxcvbnm";
+            if (possibleKeys.indexOf(keyPressed) === -1) return null;
+            if (this.state.lettersGuessed.has(keyPressed)) return null;
+            letter = keyPressed;
+        }
         this.setState(({lettersGuessed}) => this.setState({lettersGuessed: new Set(lettersGuessed).add(letter)}));
         if (this.state.randomWord.word.indexOf(letter) === -1) {
             if (this.state.wrongGuessNr < 9) {

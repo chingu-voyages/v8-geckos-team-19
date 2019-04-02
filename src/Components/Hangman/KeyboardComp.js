@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import styled from 'styled-components';
 
 const Keyboard = styled.div`
@@ -51,6 +51,11 @@ const keys = [
 ]
 
 export default ({letterClick, lettersGuessed, word}) => {
+
+    useEffect(() => {
+        window.addEventListener('keydown', letterClick);
+        return () => window.removeEventListener('keydown', letterClick)
+    }, [])
 
     return (
         <Keyboard>
