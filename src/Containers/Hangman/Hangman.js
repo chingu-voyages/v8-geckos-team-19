@@ -98,7 +98,7 @@ export default class extends Component {
     }
 
     fetchRandomWord = async () => {
-        this.setState({loading: true});
+        this.setState({loading: true, fetchError: false});
         const getWordObj = () => axios.get('http://api.wordnik.com/v4/words.json/randomWord?hasDictionaryDef=true&minLength=4&maxLength=10&api_key=b58be748b0cd0e255900b0e5b2a0bb941838def7258c93a0b');
         const getWordDefObj = (wordObj) => axios.get(`https://api.wordnik.com/v4/word.json/${wordObj.data.word}/definitions?limit=200&includeRelated=false&useCanonical=true&includeTags=false&api_key=b58be748b0cd0e255900b0e5b2a0bb941838def7258c93a0b`)
         
@@ -165,6 +165,12 @@ export default class extends Component {
 
         let rightWindowDisplay = () => {
             if (loading) return <LoadingAnim>- Fetching Word -</LoadingAnim>
+            if (fetchError) return (
+            <>
+                <h1>There was a problem in fetching a new word.</h1>
+                <Button onClick={this.btnHandler}>Try Again?</Button>
+            </>
+            )
             if (randomWord) return (
                 <>
                     <WordComp word={randomWord} lettersGuessed={lettersGuessed}/>
@@ -173,7 +179,7 @@ export default class extends Component {
                         : <div>
                             <h1 style={{color: '#0047ba', textAlign: 'center'}}>{randomWord.word}</h1>
                             <h3><span style={{color: '#0047ba'}}>Defenition:&nbsp;</span>{randomWord.text}</h3>
-                            <p>{`(${randomWord.attributionText})`}</p>
+                            <p>{randomWord.attributionText}</p>
                         </div>
                     }
                 {gameState !== 'playing' &&
@@ -192,7 +198,12 @@ export default class extends Component {
             <GameWrapper>
                 <DrawingWindow color={wrongGuessNr === 9? "red": "#0047ba"} bgColor={wrongGuessNr === 9? "rgba(255, 0, 0, 0.5)": "rgba(233, 135, 255, 0.5)"}>
                     {wrongGuessNr === 0 && gameState === 'playing' && <h2>Choose your first letter</h2>}
-                    {gameState === 'won' && <WonImg alt="confetti" src="https://media.giphy.com/media/s2qXK8wAvkHTO/giphy.gif" />}
+                    {gameState === 'won' &&
+                        <>
+                            <WonImg alt="confetti" src="https://media.giphy.com/media/s2qXK8wAvkHTO/giphy.gif" />
+                            <h1 style={{position: 'absolute', textAlign: 'center', bottom: '5%', color: 'white', boxShadow: '2px 3px 15px 0px rgba(0,0,0,0.40)', padding: '10px', backgroundColor: 'rgba(0, 0, 0, 0.5'}}>Congratulations!</h1>
+                        </>
+                        }
                     {gameState !== 'won' &&
                         <GroupForAnim animExit={animExit} animAttention={wrongGuessNr === 9} display={wrongGuessNr === 0? "none": "block"}>
                             {imgSrcArray.map((part, idx) =>
