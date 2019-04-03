@@ -41,7 +41,7 @@ const GroupForAnim = styled.div`
     display: ${props => props.display};
     width: 371px;
     height: 500px;
-    ${props => props.animAttention
+    ${props => props.animationAttention
         ? css`animation: ${vibrate} 0.5s linear infinite both;`
         : null}
     ${props => props.animationExit
@@ -68,7 +68,7 @@ export default class extends Component {
     state={
         guessNumber: 0,
         animationExit: false,
-        animAttention: false
+        animationAttention: false
     }
 
     btnHandler = () => {
@@ -115,7 +115,7 @@ export default class extends Component {
             <GameWrapper>
                 <DrawingWindow color={guessNumber === 9? "red": "#0047ba"}>
                     {guessNumber === 0 && <h2>Choose your first letter</h2>}
-                    <GroupForAnim animationExit={animationExit} animAttention={guessNumber === 9} display={guessNumber === 0? "none": "block"}>
+                    <GroupForAnim animationExit={animationExit} animationAttention={guessNumber === 9} display={guessNumber === 0? "none": "block"}>
                         {imgSrcArray.map((part, idx) =>
                             <BodyPart key={idx} src={part} display={guessNumber >= idx + 1? "block": "none"}/>
                             )}
