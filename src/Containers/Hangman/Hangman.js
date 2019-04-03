@@ -15,6 +15,7 @@ import {slideOutBlurredTop, vibrate} from "../../Shared/animations";
 
 const GameWrapper = styled.div`
     display: flex;
+    flex-direction: row;
     align-items: center;
     justify-content: center;
     width: 100%;
@@ -24,6 +25,7 @@ const GameWrapper = styled.div`
 const DrawingWindow = styled.div`
     position: relative;
     display: flex;
+    flex-direction: row;
     align-items: center;
     justify-content: center;
     width: 371px;
@@ -42,7 +44,7 @@ const GroupForAnim = styled.div`
     ${props => props.animAttention
         ? css`animation: ${vibrate} 0.5s linear infinite both;`
         : null}
-    ${props => props.animExit
+    ${props => props.animationExit
         ? css`animation: ${slideOutBlurredTop} 0.45s cubic-bezier(0.755, 0.050, 0.855, 0.060) both;`
         : null}
 `
@@ -64,16 +66,16 @@ const Stub = styled.h1`
 
 export default class extends Component {
     state={
-        guessNr: 0,
-        animExit: false,
+        guessNumber: 0,
+        animationExit: false,
         animAttention: false
     }
 
     btnHandler = () => {
-        if (this.state.guessNr < 9) {
-            this.setState(prevState => ({guessNr: prevState.guessNr + 1}))
+        if (this.state.guessNumber < 9) {
+            this.setState(prevState => ({guessNumber: prevState.guessNumber + 1}))
         } else {
-            this.setState({guessNr: 0})
+            this.setState({guessNumber: 0})
         }
     }
 
@@ -81,19 +83,19 @@ export default class extends Component {
         // Initial Animation
         setTimeout(() => {
             this.interval = setInterval(() => {
-                if (this.state.guessNr < 9) {
-                    this.setState(prevState => ({guessNr: prevState.guessNr + 1}));
+                if (this.state.guessNumber < 9) {
+                    this.setState(prevState => ({guessNumber: prevState.guessNumber + 1}));
                 } else {
                     clearInterval(this.interval);
-                    setTimeout(() => this.setState({animExit: true}), 2000); 
-                    setTimeout(() => this.setState({guessNr: 0, animExit: false}), 3000);
+                    setTimeout(() => this.setState({animationExit: true}), 2000); 
+                    setTimeout(() => this.setState({guessNumber: 0, animationExit: false}), 3000);
                 }
             }, 100)
         }, 1000)
     }
 
     render() {
-        const {guessNr, animExit} = this.state;
+        const {guessNumber, animationExit} = this.state;
         
         const imgSrcArray = [
             standSvg,
@@ -111,11 +113,11 @@ export default class extends Component {
             <>
             <h1 style={{fontSize: '4rem', textDecoration: 'underline', color: '#0047ba', textAlign: 'center', width: '100%'}}>Hangman</h1>
             <GameWrapper>
-                <DrawingWindow color={guessNr === 9? "red": "#0047ba"}>
-                    {guessNr === 0 && <h2>Choose your first letter</h2>}
-                    <GroupForAnim animExit={animExit} animAttention={guessNr === 9} display={guessNr === 0? "none": "block"}>
+                <DrawingWindow color={guessNumber === 9? "red": "#0047ba"}>
+                    {guessNumber === 0 && <h2>Choose your first letter</h2>}
+                    <GroupForAnim animationExit={animationExit} animAttention={guessNumber === 9} display={guessNumber === 0? "none": "block"}>
                         {imgSrcArray.map((part, idx) =>
-                            <BodyPart key={idx} src={part} display={guessNr >= idx + 1? "block": "none"}/>
+                            <BodyPart key={idx} src={part} display={guessNumber >= idx + 1? "block": "none"}/>
                             )}
                     </GroupForAnim>
                 </DrawingWindow>
