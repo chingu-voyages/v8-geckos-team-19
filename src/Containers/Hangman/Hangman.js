@@ -80,7 +80,8 @@ export default class extends Component {
         introAnimating: true,
         randomWord: null,
         fetchError: null,
-        round: 1,
+        rounds: 0,
+        roundsWon: 0,
         lettersGuessed: new Set(),
         gameState: 'playing',
         loading: false,
@@ -99,8 +100,9 @@ export default class extends Component {
 
     fetchRandomWord = async () => {
         this.setState({loading: true, fetchError: false});
-        const getWordObj = () => axios.get('http://api.wordnik.com/v4/words.json/randomWord?hasDictionaryDef=true&minLength=4&maxLength=10&api_key=b58be748b0cd0e255900b0e5b2a0bb941838def7258c93a0b');
-        const getWordDefObj = (wordObj) => axios.get(`https://api.wordnik.com/v4/word.json/${wordObj.data.word}/definitions?limit=200&includeRelated=false&useCanonical=true&includeTags=false&api_key=b58be748b0cd0e255900b0e5b2a0bb941838def7258c93a0b`)
+        const wordNikApi = process.env.REACT_APP_WORDNIK_API;
+        const getWordObj = () => axios.get(`http://api.wordnik.com/v4/words.json/randomWord?hasDictionaryDef=true&minLength=4&maxLength=10&api_key=${wordNikApi}`);
+        const getWordDefObj = (wordObj) => axios.get(`https://api.wordnik.com/v4/word.json/${wordObj.data.word}/definitions?limit=200&includeRelated=false&useCanonical=true&includeTags=false&api_key=${wordNikApi}`);
         
         try {
             const wordObj = await getWordObj();
@@ -120,12 +122,12 @@ export default class extends Component {
             if (this.state.lettersGuessed.has(keyPressed)) return null;
             letter = keyPressed;
         }
-        this.setState(({lettersGuessed}) => this.setState({lettersGuessed: new Set(lettersGuessed).add(letter)}));
+        this.setState(({lettersGuessed}) => ({lettersGuessed: new Set(lettersGuessed).add(letter)}));
         if (this.state.randomWord.word.indexOf(letter) === -1) {
             if (this.state.wrongGuessNr < 9) {
                 this.setState(prevState => ({wrongGuessNr: prevState.wrongGuessNr + 1}), () => {
                     if (this.state.wrongGuessNr === 9) {
-                        this.setState({gameState: 'lost'})
+                        this.setState(({rounds}) => ({gameState: 'lost', rounds: rounds + 1}))
                     }
                 })
             }
@@ -133,7 +135,7 @@ export default class extends Component {
             const nrOfOcurrances = this.state.randomWord.word.split(letter).length - 1;
             this.setState(({rightGuessNr}) => ({rightGuessNr: rightGuessNr + nrOfOcurrances}), () => {
                 if (this.state.rightGuessNr === this.state.randomWord.word.length) {
-                    this.setState({gameState: 'won'})
+                    this.setState(({roundsWon, rounds}) => ({gameState: 'won', roundsWon: roundsWon + 1, rounds: rounds + 1}))
                 }
             })
         }
@@ -156,7 +158,7 @@ export default class extends Component {
     }
 
     render() {
-        const {wrongGuessNr, animExit, randomWord, fetchError, round, lettersGuessed, gameState, introAnimating, loading} = this.state;
+        const {wrongGuessNr, animExit, randomWord, fetchError, rounds, roundsWon, lettersGuessed, gameState, introAnimating, loading} = this.state;
         
         const imgSrcArray = [
             standSvg,
@@ -221,6 +223,7 @@ export default class extends Component {
                 {!introAnimating &&
                     <KeybWordWindow color="#0047ba">
                         {rightWindowDisplay()}
+                        <h1 style={{color: 'red'}}>Score:&nbsp;{`${roundsWon} / ${rounds}`}</h1>
                     </KeybWordWindow>}
             </GameWrapper>
             </>
