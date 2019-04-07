@@ -13,6 +13,19 @@ export const fadeZoomIn = keyframes`
         }
 `;
 
+export const fadeZoomOut = keyframes`
+    from {
+        opacity: 1;
+        transform: scale(1, 1);
+        filter: blur(0px);
+        }
+    to {
+        opacity: 0;
+        transform: scale(0.5, 0.5);
+        filter: blur(10px);
+        }
+`;
+
 export const fadeIn = keyframes`
     from {
         opacity: 0;
@@ -24,120 +37,148 @@ export const fadeIn = keyframes`
         }
 `;
 
-export const boucneIn = keyframes`
+export const slideDown = keyframes`
     0% {
-        transform: translateY(-500px);
-        animation-timing-function: ease-in;
         opacity: 0;
-    }
-    38% {
-        transform: translateY(0);
-        animation-timing-function: ease-out;
-        opacity: 1;
-    }
-    55% {
-        transform: translateY(-65px);
-        animation-timing-function: ease-in;
-    }
-    72% {
-            transform: translateY(0);
-            animation-timing-function: ease-out;
-    }
-    81% {
-        transform: translateY(-28px);
-        animation-timing-function: ease-in;
-    }
-    90% {
-        transform: translateY(0);
-        animation-timing-function: ease-out;
-    }
-    95% {
-        transform: translateY(-8px);
-        animation-timing-function: ease-in;
+        transform: translateY(-100%);
     }
     100% {
-        transform: translateY(0);
-        animation-timing-function: ease-out;
-    }
-`;
-
-export const rollInTop = keyframes`
+        opacity: 1;
+        transform: translateY(0%);
+}
+`
+export const slideUp = keyframes`
     0% {
-        transform: translateY(-800px) rotate(-540deg) scale(0.1);
         opacity: 0;
+        transform: translateY(100%);
     }
     100% {
-        transform: translateY(0) rotate(0deg) scale(1);
         opacity: 1;
+        transform: translateY(0%);
     }
 `
-
-export const rollInRight = keyframes`
+export const flipVertFwd = keyframes`
     0% {
-        transform: translateX(800px) rotate(540deg) scale(0.1);
-        opacity: 0;
-    }
+        transform: translateZ(0) rotateY(0);
+    } 
     100% {
-        transform: translateX(0) rotate(0deg) scale(1);
-        opacity: 1;
-    }
+        transform: translateZ(160px) rotateY(180deg);
+    } 
 `
+// export const boucneIn = keyframes`
+//     0% {
+//         transform: translateY(-500px);
+//         animation-timing-function: ease-in;
+//         opacity: 0;
+//     }
+//     38% {
+//         transform: translateY(0);
+//         animation-timing-function: ease-out;
+//         opacity: 1;
+//     }
+//     55% {
+//         transform: translateY(-65px);
+//         animation-timing-function: ease-in;
+//     }
+//     72% {
+//             transform: translateY(0);
+//             animation-timing-function: ease-out;
+//     }
+//     81% {
+//         transform: translateY(-28px);
+//         animation-timing-function: ease-in;
+//     }
+//     90% {
+//         transform: translateY(0);
+//         animation-timing-function: ease-out;
+//     }
+//     95% {
+//         transform: translateY(-8px);
+//         animation-timing-function: ease-in;
+//     }
+//     100% {
+//         transform: translateY(0);
+//         animation-timing-function: ease-out;
+//     }
+// `;
 
-export const rollInLeft = keyframes`
-    0% {
-        transform: translateX(-800px) rotate(-540deg) scale(0.1);
-        opacity: 0;
-    }
-    100% {
-        transform: translateX(0) rotate(0deg) scale(1);
-        opacity: 1;
-    }
-`
+// export const rollInTop = keyframes`
+//     0% {
+//         transform: translateY(-800px) rotate(-540deg) scale(0.1);
+//         opacity: 0;
+//     }
+//     100% {
+//         transform: translateY(0) rotate(0deg) scale(1);
+//         opacity: 1;
+//     }
+// `
 
-export const rollInBottom = keyframes`
-    0% {
-        transform: translateY(800px) rotate(540deg) scale(0.1);
-        opacity: 0;
-    }
-    100% {
-        transform: translateY(0) rotate(0deg) scale(1);
-        opacity: 1;
-    }
-`
+// export const rollInRight = keyframes`
+//     0% {
+//         transform: translateX(800px) rotate(540deg) scale(0.1);
+//         opacity: 0;
+//     }
+//     100% {
+//         transform: translateX(0) rotate(0deg) scale(1);
+//         opacity: 1;
+//     }
+// `
 
-export const rollIn = keyframes`
-    0% {
-        transform: rotate(540deg) scale(0.1);
-        opacity: 0;
-    }
-    100% {
-        transform: rotate(0deg) scale(1);
-        opacity: 1;
-    }
-`
+// export const rollInLeft = keyframes`
+//     0% {
+//         transform: translateX(-800px) rotate(-540deg) scale(0.1);
+//         opacity: 0;
+//     }
+//     100% {
+//         transform: translateX(0) rotate(0deg) scale(1);
+//         opacity: 1;
+//     }
+// `
+
+// export const rollInBottom = keyframes`
+//     0% {
+//         transform: translateY(800px) rotate(540deg) scale(0.1);
+//         opacity: 0;
+//     }
+//     100% {
+//         transform: translateY(0) rotate(0deg) scale(1);
+//         opacity: 1;
+//     }
+// `
+
+// export const rollIn = keyframes`
+//     0% {
+//         transform: rotate(540deg) scale(0.1);
+//         opacity: 0;
+//     }
+//     100% {
+//         transform: rotate(0deg) scale(1);
+//         opacity: 1;
+//     }
+// `
 
 export const scaleIn = keyframes`
     0% {
         transform: scale(0);
-        opacity: 1;
-    }
-    100% {
-        transform: scale(1);
-        opacity: 1;
-    }
-`
-export const puffOut = keyframes`
-    0% {
-        transform: scale(1);
-        filter: blur(0px);
-        opacity: 1;
-    }
-    100% {
-        transform: scale(2);
-        filter: blur(2px);
         opacity: 0;
     }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
 `
+// export const puffOut = keyframes`
+//     0% {
+//         transform: scale(1);
+//         filter: blur(0px);
+//         opacity: 1;
+//     }
+//     100% {
+//         transform: scale(2);
+//         filter: blur(2px);
+//         opacity: 0;
+//     }
+// `
 
 export const slideOutBlurredTop = keyframes`
     0% {
@@ -227,3 +268,30 @@ export const spin360 = keyframes`
     }
 `;
 //animation: ${spin360} 0.5s cubic-bezier(0.455, 0.030, 0.515, 0.955) both;
+
+export const rainbow = keyframes`
+    0% {
+        color: rgb(255, 79, 79);
+    }
+    33% {
+        color: rgb(79, 255, 79);
+    }
+    66% {
+        color: rgb(79, 79, 255);
+    }
+    100% {
+        color: rgb(255, 79, 79);
+    }
+`
+
+export const animateBorders = keyframes`
+    0% {
+        border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+    }
+    50% {
+        border-radius: 15px 225px 15px 255px/255px 15px 225px 15px;
+    }
+    100% {
+        border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+    }
+`

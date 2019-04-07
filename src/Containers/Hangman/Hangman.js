@@ -11,17 +11,20 @@ import rightLegSvg from "../../Assets/Images/Hangman/right-leg.svg";
 import eyesSvg from "../../Assets/Images/Hangman/eyes.svg";
 import BodyPart from "../../Components/Hangman/SVG_Comps/BodyPart"
 import Button from "../../Shared/UI/Button";
-import {slideOutBlurredTop, vibrate, spin360, fadeZoomIn} from "../../Shared/animations";
+import {slideOutBlurredTop, vibrate, spin360, fadeZoomIn, animateBorders} from "../../Shared/animations";
 import axios from 'axios';
 import WordComp from "../../Components/Hangman/WordComp";
 import KeyboardComp from "../../Components/Hangman/KeyboardComp";
 
+
+// This is the same css as for the Individual games containers. Should be shared - under layout component or something
 const GameWrapper = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
     width: 100%;
     box-sizing: border-box;
+    animation: ${fadeZoomIn} 0.3s ease-in-out;
 `
 
 const DrawingWindow = styled.div`
@@ -33,7 +36,8 @@ const DrawingWindow = styled.div`
     height: 500px;
     border: 4px solid ${props => props.color};
     /* border-radius: 20px; */
-    border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+    /* border-radius: 255px 15px 225px 15px/15px 225px 15px 255px; */
+    animation: ${animateBorders} 10s ease-in-out infinite;
     margin: 50px;
     box-sizing: border-box;
     background-color: ${props => props.bgColor};
@@ -57,6 +61,8 @@ const KeybWordWindow = styled(DrawingWindow)`
     justify-content: space-evenly;
     width: 500px;
     padding: 15px;
+    border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+    animation: none;
     background-color: rgba(227, 255, 135, 0.5);
 `
 
@@ -73,7 +79,7 @@ const WonImg = styled.img`
 
 export default class extends Component {
     state={
-        wrongGuessNr: 0,
+        wrongGuessNr: 1,
         rightGuessNr: 0,
         animExit: false,
         animAttention: false,
@@ -108,7 +114,7 @@ export default class extends Component {
             const wordObj = await getWordObj();
             const wordDefObj = await getWordDefObj(wordObj);
             this.setState({randomWord: wordDefObj.data[0]}, () => this.setState({loading: false}));
-            console.log(wordDefObj.data[0].word)
+            // console.log(wordDefObj.data[0].word)
         } catch (error) {
             this.setState({fetchError: error}, () => this.setState({loading: false}))
         }
@@ -216,7 +222,11 @@ export default class extends Component {
                     {gameState !== 'won' &&
                         <GroupForAnim animExit={animExit} animAttention={wrongGuessNr === 9} display={wrongGuessNr === 0? "none": "block"}>
                             {imgSrcArray.map((part, idx) =>
-                                <BodyPart key={idx} src={part} display={wrongGuessNr >= idx + 1? "block": "none"}/>
+                                <BodyPart
+                                    key={idx}
+                                    src={part}
+                                    display={wrongGuessNr >= idx + 1? "block": "none"}
+                                />
                                 )}
                         </GroupForAnim>}
                 </DrawingWindow>
