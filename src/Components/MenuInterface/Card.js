@@ -17,17 +17,10 @@ export const CardContainer = styled.div`
     background-color: ${props => props.cardColor};
     z-index: -2;
     padding: 15px;
-    /* text-align: center; */
     margin: auto;
-    /* border-radius: 20px; */
     border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
-    /* border: 4px solid #0047ba; */
     overflow: hidden;
     box-sizing: border-box;
-    /* background-image: url(${props => props.bgImg});
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: auto 95%; */
     cursor: pointer;
     box-shadow: 1px 1px 10px -3px;
     transition: box-shadow 0.5s ease-in-out;
@@ -40,12 +33,6 @@ export const CardContainer = styled.div`
 `;
 
 const BgImg = styled.img`
-    /* ${props => props.active
-        ? 'position: absolute;'
-        : null} */
-    /* position: absolute; */
-    /* top: 5%;
-    left: 5%; */
     z-index: -1;
     display:block;
     margin: auto;
@@ -56,10 +43,8 @@ const BgImg = styled.img`
 
 const DescrContainer = styled.div`
     color: black;
-    /* border-radius: 20px; */
     padding: 10px;
     box-sizing: border-box;
-    /* background-color: rgba(0, 0, 0, 0.7); */
     width: 100%;
     height: 100%;
     display: flex;
@@ -90,8 +75,6 @@ export default ({heading, description, coverImg, clickHandler, cardSize, cardCol
                 size={cardSize}
                 active={cardActive}
                 cardColor={cardColor}
-                // bg={light}
-                // bgImg={coverImg}
             >
                 <BgImg src={coverImg} alt={heading} active={cardActive}/>
                 {cardActive &&

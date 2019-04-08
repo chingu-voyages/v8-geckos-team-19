@@ -1,5 +1,4 @@
 import hangmanImg from "../Assets/Images/Menu/hangman.svg";
-// import triviaImg from "../Assets/Images/Menu/trivia-2.jpg";
 import ticTacToeImg from "../Assets/Images/Menu/tic_tac_toe.svg";
 import triviaImg from "../Assets/Images/Menu/trivia.svg";
 
@@ -19,9 +18,4 @@ export default [
         descr: "Test your general knowledge by answering the questions from the chosen categories.",
         image: triviaImg
     },
-    // {
-    //     title: "Mastermind",
-    //     descr: "This is the description of our fourth faboulous, silly and entertaining game with which you can waste your time.",
-    //     image: mastermindImg
-    // },
 ]

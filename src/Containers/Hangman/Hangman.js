@@ -11,7 +11,7 @@ import rightLegSvg from "../../Assets/Images/Hangman/right-leg.svg";
 import eyesSvg from "../../Assets/Images/Hangman/eyes.svg";
 import BodyPart from "../../Components/Hangman/SVG_Comps/BodyPart"
 import Button from "../../Shared/UI/Button";
-import {slideOutBlurredTop, vibrate, spin360, fadeZoomIn, animateBorders} from "../../Shared/animations";
+import {slideOutBlurredTop, vibrate, fadeZoomIn, animateBorders} from "../../Shared/animations";
 import LoadingAnimation from "../../Shared/UI/LoadingAnimation";
 import axios from 'axios';
 import WordComp from "../../Components/Hangman/WordComp";
@@ -36,8 +36,6 @@ const DrawingWindow = styled.div`
     width: 371px;
     height: 500px;
     border: 4px solid ${props => props.color};
-    /* border-radius: 20px; */
-    /* border-radius: 255px 15px 225px 15px/15px 225px 15px 255px; */
     animation: ${animateBorders} 10s ease-in-out infinite;
     margin: 50px;
     box-sizing: border-box;
@@ -66,10 +64,6 @@ const KeybWordWindow = styled(DrawingWindow)`
     animation: none;
     background-color: rgba(227, 255, 135, 0.5);
 `
-
-// const LoadingAnim = styled.h1`
-//     animation: ${spin360} 0.5s cubic-bezier(0.455, 0.030, 0.515, 0.955) both infinite;
-// `
 
 const WonImg = styled.img`
     display: block;
@@ -163,18 +157,6 @@ export default class extends Component {
     }
 
     componentDidMount() {
-        // Initial Animation
-        // setTimeout(() => {
-        //     this.interval = setInterval(() => {
-        //         if (this.state.wrongGuessNr < 9) {
-        //             this.setState(prevState => ({wrongGuessNr: prevState.wrongGuessNr + 1}));
-        //         } else {
-        //             clearInterval(this.interval);
-        //             setTimeout(() => this.setState({animExit: true, introAnimating: false}), 2000); 
-        //             setTimeout(() => this.setState({wrongGuessNr: 0, animExit: false}), 3000);
-        //         }
-        //     }, 100)
-        // }, 1000)
 
         this.fetchRandomWord();
 
@@ -216,18 +198,6 @@ export default class extends Component {
     render() {
         const {wrongGuessNr, animExit, randomWord, fetchError, rounds, roundsWon, lettersGuessed, gameState, introAnimating, loading, pageReady} = this.state;
         
-        // const imgSrcArray = [
-        //     standSvg,
-        //     nooseSvg,
-        //     headSvg,
-        //     bodySvg,
-        //     leftArmSvg,
-        //     rightArmSvg,
-        //     leftLegSvg,
-        //     rightLegSvg,
-        //     eyesSvg
-        // ];
-
         let rightWindowDisplay = () => {
             if (loading) return <LoadingAnimation>Fetching new word...</LoadingAnimation>
             if (fetchError) return (
@@ -291,35 +261,6 @@ export default class extends Component {
         }
 
         return mainContent()
-            // <>
-            // <h1 style={{fontSize: '4rem', textDecoration: 'underline', color: '#0047ba', textAlign: 'center', width: '100%'}}>Hangman</h1>
-            // <GameWrapper>
-            //     <DrawingWindow color={wrongGuessNr === 9? "red": "#0047ba"} bgColor={wrongGuessNr === 9? "rgba(255, 0, 0, 0.5)": "rgba(233, 135, 255, 0.5)"}>
-            //         {wrongGuessNr === 0 && gameState === 'playing' && <h2>Choose your first letter</h2>}
-            //         {gameState === 'won' &&
-            //             <>
-            //                 <WonImg alt="confetti" src="https://media.giphy.com/media/s2qXK8wAvkHTO/giphy.gif" />
-            //                 <h1 style={{position: 'absolute', textAlign: 'center', bottom: '5%', color: 'white', boxShadow: '2px 3px 15px 0px rgba(0,0,0,0.40)', padding: '10px', backgroundColor: 'rgba(0, 0, 0, 0.5'}}>Congratulations!</h1>
-            //             </>
-            //             }
-            //         {gameState !== 'won' &&
-            //             <GroupForAnim animExit={animExit} animAttention={wrongGuessNr === 9} display={wrongGuessNr === 0? "none": "block"}>
-            //                 {imgSrcArray.map((part, idx) =>
-            //                     <BodyPart
-            //                         key={idx}
-            //                         src={part}
-            //                         display={wrongGuessNr >= idx + 1? "block": "none"}
-            //                     />
-            //                     )}
-            //             </GroupForAnim>}
-            //     </DrawingWindow>
-            //     {!introAnimating &&
-            //         <KeybWordWindow color="#0047ba">
-            //             {rightWindowDisplay()}
-            //             <h1 style={{color: 'red'}}>Score:&nbsp;{`${roundsWon} / ${rounds}`}</h1>
-            //         </KeybWordWindow>}
-            // </GameWrapper>
-            // </>
         
     }
 }

@@ -10,26 +10,12 @@ import HomeIcon from "./Assets/Images/Menu/home_icon_2.svg";
 import LoadingAnimation from "./Shared/UI/LoadingAnimation";
 import menuData from "./Data/menuData";
 
-// const GlobalStyle = createGlobalStyle`
-//     body {
-//         background: url(${notepaperImg});
-//         background-color: teal;
-//         font-family: 'Indie Flower', cursive;
-//     }
-// `;
-
 const HomeIcn = styled.button`
-    /* display: flex; */
-    /* align-items: flex-start; */
-    /* justify-content: center; */
     outline: none;
     border: none;
     width: 80px;
     height: 80px;
     background-color: transparent;
-    /* border-radius: 50%; */
-    /* background-color: salmon; */
-    /* opacity: 0.5; */
     position: fixed;
     bottom: 50px;
     right: 50px;
@@ -41,25 +27,16 @@ export const StateContext = createContext(null);
 class App extends Component {
     state = {
         activeDisplay: "menuInterface", // possible states: mainMenu / hangman / trivia / snake
-        // imagesLoaded: [],
         imagesLoaded: 0,
         pageReady: false,
     };
-
-    // animToNext = next => {
-    //     this.setState({animateDisplayOut: true}, () => {
-    //         setTimeout(() => {
-    //             this.setState({activeDisplay: next, animateDisplayOut: false})
-    //         }, 280)
-    //     })
-    // }
 
     cardClickHandler = next => {
         this.setState({activeDisplay: next})
     }
 
     componentDidMount() {
-        // Pre load images before render
+        // Pre cache images before render
         const bgImg = new Image();
         bgImg.src = notepaperImg;
         bgImg.onload = () => this.setState(({imagesLoaded}) => ({imagesLoaded: imagesLoaded + 1}));
