@@ -60,7 +60,7 @@ const Handle = styled.div`
     background-color: rgb(255, 248, 198);
     writing-mode: vertical-rl;
     text-orientation: upright;
-    padding-right: 8px;
+    padding: 5px 8px 5px 0px;
     box-sizing: border-box;
     animation: ${rainbow} 5s linear infinite;
     /* margin: auto; */

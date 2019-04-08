@@ -295,3 +295,27 @@ export const animateBorders = keyframes`
         border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
     }
 `
+export const jelloVert = keyframes`
+    0% {
+        transform: scale3d(1, 1, 1);
+    }
+    30% {
+        transform: scale3d(0.75, 1.25, 1);
+    }
+    40% {
+        transform: scale3d(1.25, 0.75, 1);
+    }
+    50% {
+        transform: scale3d(0.85, 1.15, 1);
+    }
+    65% {
+        transform: scale3d(1.05, 0.95, 1);
+    }
+    75% {
+        transform: scale3d(0.95, 1.05, 1);
+    }
+    100% {
+        transform: scale3d(1, 1, 1);
+    }
+`
+// animation: jello-vertical 0.9s both;

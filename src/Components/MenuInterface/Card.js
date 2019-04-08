@@ -10,11 +10,10 @@ const TriggerBox = styled.div`
     transition: transform 0.3s ease-in-out;
 `
 
-const CardContainer = styled.div`
+export const CardContainer = styled.div`
     position: relative;
     width: ${props => props.size || '300px'};
     height: ${props => props.size || '300px'};
-    margin: 10px;
     background-color: ${props => props.cardColor};
     z-index: -2;
     padding: 15px;
@@ -36,14 +35,14 @@ const CardContainer = styled.div`
         props.active
             ? css`
             animation: ${flipVertFwd} 0.4s cubic-bezier(0.455, 0.030, 0.515, 0.955) both;
-            box-shadow: 3px 5px 13px 0px rgba(0,0,0,0.60);`
+            box-shadow: -3px 5px 13px 0px rgba(0,0,0,0.60);`
             : null} 
 `;
 
 const BgImg = styled.img`
-    ${props => props.active
+    /* ${props => props.active
         ? 'position: absolute;'
-        : null}
+        : null} */
     /* position: absolute; */
     /* top: 5%;
     left: 5%; */
@@ -68,7 +67,7 @@ const DescrContainer = styled.div`
     align-items: center;
     justify-content: space-between;
     animation: ${fadeIn} 0.5s ease-in-out;
-    transform: scaleX(-1);
+    transform: scaleX(-1) translateY(-100%);
 `
 
 const DescrHeading = styled.h2`

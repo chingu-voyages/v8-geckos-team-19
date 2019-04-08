@@ -12,6 +12,7 @@ import eyesSvg from "../../Assets/Images/Hangman/eyes.svg";
 import BodyPart from "../../Components/Hangman/SVG_Comps/BodyPart"
 import Button from "../../Shared/UI/Button";
 import {slideOutBlurredTop, vibrate, spin360, fadeZoomIn, animateBorders} from "../../Shared/animations";
+import LoadingAnimation from "../../Shared/UI/LoadingAnimation";
 import axios from 'axios';
 import WordComp from "../../Components/Hangman/WordComp";
 import KeyboardComp from "../../Components/Hangman/KeyboardComp";
@@ -66,9 +67,9 @@ const KeybWordWindow = styled(DrawingWindow)`
     background-color: rgba(227, 255, 135, 0.5);
 `
 
-const LoadingAnim = styled.h1`
-    animation: ${spin360} 0.5s cubic-bezier(0.455, 0.030, 0.515, 0.955) both infinite;
-`
+// const LoadingAnim = styled.h1`
+//     animation: ${spin360} 0.5s cubic-bezier(0.455, 0.030, 0.515, 0.955) both infinite;
+// `
 
 const WonImg = styled.img`
     display: block;
@@ -76,6 +77,18 @@ const WonImg = styled.img`
     object-fit: cover;
     animation: ${fadeZoomIn} 0.3s ease-in;
 `
+
+const imgSrcArray = [
+    standSvg,
+    nooseSvg,
+    headSvg,
+    bodySvg,
+    leftArmSvg,
+    rightArmSvg,
+    leftLegSvg,
+    rightLegSvg,
+    eyesSvg
+];
 
 export default class extends Component {
     state={
@@ -91,6 +104,8 @@ export default class extends Component {
         lettersGuessed: new Set(),
         gameState: 'playing',
         loading: false,
+        imagesLoaded: 0,
+        pageReady: false
     }
 
     btnHandler = () => {
@@ -149,37 +164,72 @@ export default class extends Component {
 
     componentDidMount() {
         // Initial Animation
-        setTimeout(() => {
-            this.interval = setInterval(() => {
-                if (this.state.wrongGuessNr < 9) {
-                    this.setState(prevState => ({wrongGuessNr: prevState.wrongGuessNr + 1}));
-                } else {
-                    clearInterval(this.interval);
-                    setTimeout(() => this.setState({animExit: true, introAnimating: false}), 2000); 
-                    setTimeout(() => this.setState({wrongGuessNr: 0, animExit: false}), 3000);
-                }
-            }, 100)
-        }, 1000)
+        // setTimeout(() => {
+        //     this.interval = setInterval(() => {
+        //         if (this.state.wrongGuessNr < 9) {
+        //             this.setState(prevState => ({wrongGuessNr: prevState.wrongGuessNr + 1}));
+        //         } else {
+        //             clearInterval(this.interval);
+        //             setTimeout(() => this.setState({animExit: true, introAnimating: false}), 2000); 
+        //             setTimeout(() => this.setState({wrongGuessNr: 0, animExit: false}), 3000);
+        //         }
+        //     }, 100)
+        // }, 1000)
+
         this.fetchRandomWord();
+
+        // Pre-cache images
+        const wonImg = new Image();
+        wonImg.src = "https://media.giphy.com/media/s2qXK8wAvkHTO/giphy.gif";
+        let bodyPartImg = null;
+        for (const item of imgSrcArray) {
+            bodyPartImg = new Image();
+            bodyPartImg.src = item;
+            bodyPartImg.onload = () =>
+                this.setState(({imagesLoaded}) =>
+                    ({imagesLoaded: imagesLoaded + 1}), () => {
+                        if (this.state.imagesLoaded >= imgSrcArray.length) {
+                            this.setState({pageReady: true})
+                        }
+                    }
+                );
+        }
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        if (this.state.pageReady && !prevState.pageReady) {
+            // Initial Animation
+            setTimeout(() => {
+                this.interval = setInterval(() => {
+                    if (this.state.wrongGuessNr < 9) {
+                        this.setState(prevState => ({wrongGuessNr: prevState.wrongGuessNr + 1}));
+                    } else {
+                        clearInterval(this.interval);
+                        setTimeout(() => this.setState({animExit: true, introAnimating: false}), 2000); 
+                        setTimeout(() => this.setState({wrongGuessNr: 0, animExit: false}), 3000);
+                    }
+                }, 100)
+            }, 1000)
+        }
     }
 
     render() {
-        const {wrongGuessNr, animExit, randomWord, fetchError, rounds, roundsWon, lettersGuessed, gameState, introAnimating, loading} = this.state;
+        const {wrongGuessNr, animExit, randomWord, fetchError, rounds, roundsWon, lettersGuessed, gameState, introAnimating, loading, pageReady} = this.state;
         
-        const imgSrcArray = [
-            standSvg,
-            nooseSvg,
-            headSvg,
-            bodySvg,
-            leftArmSvg,
-            rightArmSvg,
-            leftLegSvg,
-            rightLegSvg,
-            eyesSvg
-        ];
+        // const imgSrcArray = [
+        //     standSvg,
+        //     nooseSvg,
+        //     headSvg,
+        //     bodySvg,
+        //     leftArmSvg,
+        //     rightArmSvg,
+        //     leftLegSvg,
+        //     rightLegSvg,
+        //     eyesSvg
+        // ];
 
         let rightWindowDisplay = () => {
-            if (loading) return <LoadingAnim>- Fetching Word -</LoadingAnim>
+            if (loading) return <LoadingAnimation>Fetching new word...</LoadingAnimation>
             if (fetchError) return (
             <>
                 <h1>There was a problem in fetching a new word.</h1>
@@ -207,8 +257,9 @@ export default class extends Component {
             )
         }
 
-        return (
-            <>
+        let mainContent = () => {
+            if (!pageReady) return <LoadingAnimation fullHeight>Loading Hangman...</LoadingAnimation>
+            return <>
             <h1 style={{fontSize: '4rem', textDecoration: 'underline', color: '#0047ba', textAlign: 'center', width: '100%'}}>Hangman</h1>
             <GameWrapper>
                 <DrawingWindow color={wrongGuessNr === 9? "red": "#0047ba"} bgColor={wrongGuessNr === 9? "rgba(255, 0, 0, 0.5)": "rgba(233, 135, 255, 0.5)"}>
@@ -237,6 +288,38 @@ export default class extends Component {
                     </KeybWordWindow>}
             </GameWrapper>
             </>
-        )
+        }
+
+        return mainContent()
+            // <>
+            // <h1 style={{fontSize: '4rem', textDecoration: 'underline', color: '#0047ba', textAlign: 'center', width: '100%'}}>Hangman</h1>
+            // <GameWrapper>
+            //     <DrawingWindow color={wrongGuessNr === 9? "red": "#0047ba"} bgColor={wrongGuessNr === 9? "rgba(255, 0, 0, 0.5)": "rgba(233, 135, 255, 0.5)"}>
+            //         {wrongGuessNr === 0 && gameState === 'playing' && <h2>Choose your first letter</h2>}
+            //         {gameState === 'won' &&
+            //             <>
+            //                 <WonImg alt="confetti" src="https://media.giphy.com/media/s2qXK8wAvkHTO/giphy.gif" />
+            //                 <h1 style={{position: 'absolute', textAlign: 'center', bottom: '5%', color: 'white', boxShadow: '2px 3px 15px 0px rgba(0,0,0,0.40)', padding: '10px', backgroundColor: 'rgba(0, 0, 0, 0.5'}}>Congratulations!</h1>
+            //             </>
+            //             }
+            //         {gameState !== 'won' &&
+            //             <GroupForAnim animExit={animExit} animAttention={wrongGuessNr === 9} display={wrongGuessNr === 0? "none": "block"}>
+            //                 {imgSrcArray.map((part, idx) =>
+            //                     <BodyPart
+            //                         key={idx}
+            //                         src={part}
+            //                         display={wrongGuessNr >= idx + 1? "block": "none"}
+            //                     />
+            //                     )}
+            //             </GroupForAnim>}
+            //     </DrawingWindow>
+            //     {!introAnimating &&
+            //         <KeybWordWindow color="#0047ba">
+            //             {rightWindowDisplay()}
+            //             <h1 style={{color: 'red'}}>Score:&nbsp;{`${roundsWon} / ${rounds}`}</h1>
+            //         </KeybWordWindow>}
+            // </GameWrapper>
+            // </>
+        
     }
 }

@@ -1,6 +1,6 @@
 import hangmanImg from "../Assets/Images/Menu/hangman.svg";
 // import triviaImg from "../Assets/Images/Menu/trivia-2.jpg";
-import ticTacToeImg from "../Assets/Images/Menu/Tic_tac_toe.svg";
+import ticTacToeImg from "../Assets/Images/Menu/tic_tac_toe.svg";
 import triviaImg from "../Assets/Images/Menu/trivia.svg";
 
 export default [
