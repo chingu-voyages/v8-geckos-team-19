@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="605" height="604" version="1">
+  <g fill="none" fill-rule="evenodd">
+    <g stroke="#000" stroke-width="6">
+      <path d="M3 202c204-15 409-20 601-7M2 197c154-3 308-4 600-4M1 404c172 1 343 1 603-4M3 404c124-9 250-7 599-5"/>
+    </g>
+    <g stroke="#000" stroke-width="5">
+      <path d="M193 601c11-203 13-403 2-595m3 595c13-179 14-360-1-595M401 604c-3-237-2-476 3-603m-2 603c4-228 5-458 1-602"/>
+    </g>
+    <g fill="#000" font-family="Chalkduster" font-size="144">
+      <text transform="translate(45 21)">
+        <tspan x="8" y="331">X</tspan>
+      </text>
+      <text transform="translate(45 21)">
+        <tspan x="414" y="331">X</tspan>
+      </text>
+      <text transform="translate(45 21)">
+        <tspan x="215" y="541">X</tspan>
+      </text>
+      <text transform="translate(45 21)">
+        <tspan x="414" y="141">X</tspan>
+      </text>
+      <text transform="translate(45 21)">
+        <tspan x="214" y="141">X</tspan>
+      </text>
+      <text transform="translate(45 21)">
+        <tspan x="8" y="141">O</tspan>
+      </text>
+      <text transform="translate(45 21)">
+        <tspan x="206" y="331">O</tspan>
+      </text>
+      <text transform="translate(45 21)">
+        <tspan x="406" y="524">O</tspan>
+      </text>
+      <text transform="translate(45 21)">
+        <tspan x="0" y="524">O</tspan>
+      </text>
+    </g>
+    <path stroke="#000" stroke-width="8" d="M60 62c175 187 355 365 493 506M60 63c144 132 281 270 499 499"/>
+  </g>
+</svg>
