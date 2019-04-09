@@ -215,4 +215,12 @@ export const jelloVert = keyframes`
         transform: scale3d(1, 1, 1);
     }
 `
+// export const snakeMove = keyframes`
+//     0% {
+//         margin-top: -50%;
+//         }
+//     100% {
+//         margin-top: 50%;
+//         }
+// `
 // animation: jello-vertical 0.9s both;

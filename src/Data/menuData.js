@@ -14,8 +14,13 @@ export default [
         image: ticTacToeImg
     },
     {
-        title: "Trivia Quiz",
-        descr: "Test your general knowledge by answering the questions from the chosen categories.",
+        title: "Snake",
+        descr: "Description of Snake Game",
         image: triviaImg
     },
+    // {
+    //     title: "Trivia Quiz",
+    //     descr: "Test your general knowledge by answering the questions from the chosen categories.",
+    //     image: triviaImg
+    // },
 ]
