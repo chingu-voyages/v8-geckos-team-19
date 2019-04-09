@@ -20,6 +20,7 @@ const Row = styled.div`
 const CharBtn = styled.button.attrs({
     type: "button"
 })`
+    background-color: white;
     margin: 0px 5px;
     display: block;
     width: 2.1rem;

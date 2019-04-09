@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components';
+import {slideDown} from '../../Shared/animations';
 
 const Container = styled.div`
     display: flex;
@@ -9,7 +10,6 @@ const Container = styled.div`
 const CharBox = styled.div`
     display: flex;
     align-items: center;
-    justify-content: center;
     margin: 0px 5px;
     width: 2rem;
     height: 2rem;
@@ -19,7 +19,9 @@ const CharBox = styled.div`
 `
 
 const Char = styled.span`
-    display: ${props => props.display};
+    display: block;
+    margin: auto;
+    animation: ${slideDown} 0.3s ease-out;
 `
 
 export default ({word, lettersGuessed}) => {
@@ -30,7 +32,7 @@ export default ({word, lettersGuessed}) => {
         <Container>
             {charArray.map((char, idx) => (
                 <CharBox key={idx} bgcolor="black">
-                    <Char display={lettersGuessed.has(char)? 'show': 'none'}>{char}</Char>
+                    {lettersGuessed.has(char)? <Char>{char}</Char>: null}
                 </CharBox>
             ))}
         </Container>
