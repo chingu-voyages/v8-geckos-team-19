@@ -16,7 +16,7 @@ const GameWrapper = styled.div`
     animation: ${fadeZoomIn} 0.3s ease-in-out;
 `;
 const FixedWindow = styled.div`
-    margin-top: 100px;
+    /* margin-top: 100px; */
     position: relative;
     display: grid;
     grid-template-columns: repeat(${props => props.gridSize}, 1fr);
@@ -289,6 +289,8 @@ export default class extends Component {
         const { foodPos, snakePosition, collision, gridSize, bgColor, score, highScore, showInstructions } = this.state;
         const imgHeight = Math.floor(500 / gridSize);
         return (
+            <>
+            <h1 style={{fontSize: '4rem', textDecoration: 'underline', color: '#0047ba', textAlign: 'center', width: '100%', marginBottom: '0px'}}>Snake</h1>
             <GameWrapper>
                 <FixedWindow gridSize={gridSize} collision={collision} bgColor={bgColor}>
                     <Apple
@@ -328,16 +330,17 @@ export default class extends Component {
                     )}
                 </FixedWindow>
                 <div style={{display: 'flex', width: '500px', justifyContent: 'space-evenly'}}>
-                    <h1 style={{color: 'red'}}>Score:&nbsp;{`${score}`}</h1>
+                    <h1 style={{color: 'red', marginBottom: '0px'}}>Score:&nbsp;{`${score}`}</h1>
                     {highScore !== 0 &&
-                    <h1 style={{color: 'blue'}}>Highscore:&nbsp;{`${highScore}`}</h1>}
-                </div>
+                    <h1 style={{color: 'blue', marginBottom: '0px'}}>Highscore:&nbsp;{`${highScore}`}</h1>}
                     {collision && <Button onClick={this.handlePlayAgain}>Play Again?</Button>}
+                </div>
                 {showInstructions &&
                     <ModalBg onClick={() => this.setState({showInstructions: false})}>
                         <Modal><img src={keysImg} alt=""/></Modal>
                     </ModalBg>}
             </GameWrapper>
+            </>
         );
     }
 }
