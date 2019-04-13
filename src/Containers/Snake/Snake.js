@@ -242,14 +242,27 @@ export default class extends Component {
             return null;
         }
         if (!this.state.collision) {
-            this.interval = setInterval(() => {
+            this.setState(prevState => ({
+                snakePosition: this.getNextSnakePos(
+                    e.key,
+                    prevState.snakePosition
+                )
+            }), () => this.interval = setInterval(() => {
                 this.setState(prevState => ({
                     snakePosition: this.getNextSnakePos(
                         e.key,
                         prevState.snakePosition
                     )
                 }));
-            }, 120);
+            }, 120));
+            // this.interval = setInterval(() => {
+            //     this.setState(prevState => ({
+            //         snakePosition: this.getNextSnakePos(
+            //             e.key,
+            //             prevState.snakePosition
+            //         )
+            //     }));
+            // }, 120);
             this.setState({ direction: e.key });
         }
     };
