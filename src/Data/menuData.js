@@ -1,6 +1,7 @@
 import hangmanImg from "../Assets/Images/Menu/hangman.svg";
 import ticTacToeImg from "../Assets/Images/Menu/tic_tac_toe.svg";
 import triviaImg from "../Assets/Images/Menu/trivia.svg";
+import snakeImg from "../Assets/Images/Menu/snake.svg";
 
 export default [
     {
@@ -15,12 +16,12 @@ export default [
     },
     {
         title: "Snake",
-        descr: "Description of Snake Game",
+        descr: "Another classic. Grow the snake by eating the apples and avoid colliding with yourself or the edges of the box.",
+        image: snakeImg
+    },
+    {
+        title: "Trivia Quiz",
+        descr: "Test your general knowledge by answering the questions from the chosen categories.",
         image: triviaImg
     },
-    // {
-    //     title: "Trivia Quiz",
-    //     descr: "Test your general knowledge by answering the questions from the chosen categories.",
-    //     image: triviaImg
-    // },
 ]
