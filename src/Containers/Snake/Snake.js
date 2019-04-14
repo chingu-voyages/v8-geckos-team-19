@@ -255,14 +255,6 @@ export default class extends Component {
                     )
                 }));
             }, 120));
-            // this.interval = setInterval(() => {
-            //     this.setState(prevState => ({
-            //         snakePosition: this.getNextSnakePos(
-            //             e.key,
-            //             prevState.snakePosition
-            //         )
-            //     }));
-            // }, 120);
             this.setState({ direction: e.key });
         }
     };

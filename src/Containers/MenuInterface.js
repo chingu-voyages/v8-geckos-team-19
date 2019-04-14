@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
 import styled, {css} from "styled-components";
 import Card from "../Components/MenuInterface/Card";
+import geckoImg from "../Assets/Images/Menu/gecko-top-view-shape.svg";
 import menuData from '../Data/menuData';
 import { fadeZoomOut, fadeZoomIn } from '../Shared/animations';
 import { StateContext } from '../App';
@@ -49,7 +50,11 @@ export default ({cardSize}) => {
 
     return (
         <MainWindow>
-            <h1 style={{margin: 'auto', fontSize: '2.5rem'}}>Game On Geckos</h1>
+            <div style ={{display: 'flex', maxWidth: '500px', justifyContent: 'center'}}>
+                <img style={{display: 'block', width: "100px", height: "85px", marginBottom: '50px', transform: 'scaleX(-1)'}} src={geckoImg} alt="Gecko Logo"/>
+                <h1 style={{margin: 'auto', fontSize: '2.5rem'}}>Game On Geckos</h1>
+                <img style={{display: 'block', width: "100px", height: "85px", marginBottom: '50px'}} src={geckoImg} alt="Gecko Logo"/>
+            </div>
             <GamesGridWrapper animateOut={animateOut}>
                 {menuData.map((data, idx) => 
                 <Card
