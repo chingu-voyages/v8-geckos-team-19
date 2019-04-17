@@ -41,6 +41,7 @@ class Simon extends React.Component {
       this.newRound = this.newRound.bind(this);
       this.resetRound = this.resetRound.bind(this);
       this.addCount = this.addCount.bind(this);
+      this.action = this.action.bind(this);
 
       this.addToGame = this.addToGame.bind(this);
     }
@@ -74,6 +75,22 @@ class Simon extends React.Component {
         yellowColor: 'grey',
         blueColor: 'grey'
       })
+    }
+
+    action(){
+      this.setState({
+        currentPlay: this.state.currentPlay.push(this.state.probability[(Math.floor(Math.random() * 4))])
+      });
+
+      this.displayActions();
+    }
+
+    displayActions(){
+      let increment = 0;
+
+      let actions = setInterval(function(){
+        // Add actions required
+      },800);
     }
 
     changeGreenColor(){
