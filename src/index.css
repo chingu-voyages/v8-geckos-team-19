@@ -26,3 +26,8 @@ ol, ul {
 .noBrdBtm button {
     border-bottom: 0;
 }
+
+.play-again-button {
+    position: absolute;
+    bottom: -100px;
+}

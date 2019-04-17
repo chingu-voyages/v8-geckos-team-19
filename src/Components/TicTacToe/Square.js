@@ -32,6 +32,10 @@ const SquareButton = styled.button`
       border-right: 0;
       border-left: 0;
   }
+
+  &:hover {
+    cursor: pointer;
+  }
 `
 
 function Square(props) {

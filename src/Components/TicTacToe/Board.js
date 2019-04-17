@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Square from './Square';
 import '../../index.css';
+import Button from "../../Shared/UI/Button";
 
 const Status = styled.div`
     margin-bottom: 10px;
@@ -32,12 +33,16 @@ class Board extends React.Component {
     state = {
         squares: Array(9).fill(null),
         xIsNext: true,
+        playing: true,
     };
 
     handleClick(i) {
         const squares = this.state.squares.slice();
 
         if(calculateWinner(squares) || squares[i]) {
+            this.setState({
+                playing: false
+            });
             return;
         }
         squares[i] = this.state.xIsNext ? 'X' : 'O';
@@ -59,6 +64,7 @@ class Board extends React.Component {
     render() {
         const winner = calculateWinner(this.state.squares);
         let status;
+        let playAgain; 
 
         if (winner) {
             status = 'Winner: ' + winner;
@@ -66,6 +72,12 @@ class Board extends React.Component {
             status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
         }
     
+        if (!this.state.playing) {
+            playAgain = <Button className="play-again-button">Play again</Button>; 
+        } else {
+            playAgain = '';
+        }
+
         return (
             <BoardWrapper>
                 <Status>
@@ -86,6 +98,8 @@ class Board extends React.Component {
                     {this.renderSquare(7)}
                     {this.renderSquare(8)}
                 </BoardRow>
+            {playAgain}
+
             </BoardWrapper>
         );
     }
@@ -111,6 +125,8 @@ function calculateWinner(squares) {
         if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
             return squares[a];
         }
+
+        console.log(squares[a] + squares[b]);
     }
     return null;
 }
