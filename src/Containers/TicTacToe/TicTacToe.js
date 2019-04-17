@@ -10,6 +10,7 @@ const GameWrapper = styled.div`
     align-items: center;
     justify-content: center;
     width: 100%;
+    height: 100vh;
     box-sizing: border-box;
 `
 
@@ -17,7 +18,7 @@ class TicTacToe extends React.Component {
     render() {
         return(
             <GameWrapper>
-                <Board />
+                <Game />
             </GameWrapper>
         );
     }

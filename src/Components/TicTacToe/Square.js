@@ -2,21 +2,35 @@ import React from 'react';
 import styled from 'styled-components';
 
 const SquareButton = styled.button`
-  background: #fff;
-  border: 1px solid #999;
+  background: transparent;
+  border: 2px solid blue; 
+  color: blue;
   float: left;
-  font-size: 24px;
+  font-size: 80px;
+  font-family: "Indie Flower", cursive;
   font-weight: bold;
-  line-height: 34px;
-  height: 34px;
-  margin-right: -1px;
+  line-height: 100px;
+  height: 100px;
+  margin-right: 0;
   margin-top: -1px;
   padding: 0;
   text-align: center;
-  width: 34px;
+  flex: 1;
+  position: relative;
 
   &:focus {
     outline: none;
+  }
+
+  &:not(:first-of-type),
+  &:not(:last-of-type) {
+    border-right: 2px solid blue;
+  }
+
+  &:first-of-type,
+  &:last-of-type {
+      border-right: 0;
+      border-left: 0;
   }
 `
 

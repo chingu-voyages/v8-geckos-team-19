@@ -1,16 +1,31 @@
 import React from 'react';
 import styled from 'styled-components';
 import Square from './Square';
+import '../../index.css';
 
 const Status = styled.div`
     margin-bottom: 10px;
+    position: absolute;
+    top: -80px;
+    font-size: 50px;
 `
 
 const BoardRow = styled.div`
+    width: 100%;
+    display: flex;
+
     &:after {
         clear: both;
         content: '';
     }
+`
+const BoardWrapper = styled.div`
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 `
 
 class Board extends React.Component {
@@ -52,12 +67,16 @@ class Board extends React.Component {
         }
     
         return (
-            <div>
+            <BoardWrapper>
                 <Status>
                     {status}
                 </Status>
-                <BoardRow>
-                    {this.renderSquare(0)}
+                <BoardRow className="noBrdTop">
+                    <Square 
+                        value={this.state.squares[0]}
+                        onClick={() => this.handleClick(0)}
+                        style={{background: 'red'}}
+                    />
                     {this.renderSquare(1)}
                     {this.renderSquare(2)}
                 </BoardRow>
@@ -66,12 +85,12 @@ class Board extends React.Component {
                     {this.renderSquare(4)}
                     {this.renderSquare(5)}
                 </BoardRow>
-                <BoardRow>
+                <BoardRow className="noBrdBtm">
                     {this.renderSquare(6)}
                     {this.renderSquare(7)}
                     {this.renderSquare(8)}
                 </BoardRow>
-            </div>
+            </BoardWrapper>
         );
     }
 }

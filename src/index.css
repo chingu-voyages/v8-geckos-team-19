@@ -18,3 +18,11 @@ code {
 ol, ul {
     padding-left: 30px;
 }
+
+.noBrdTop button {
+    border-top: 0;
+}
+
+.noBrdBtm button {
+    border-bottom: 0;
+}
