@@ -22,7 +22,13 @@ class Simon extends React.Component {
         greenColor: 'grey',
         redColor: 'grey',
         yellowColor: 'grey',
-        blueColor: 'grey'
+        blueColor: 'grey',
+        totalCount: 0,
+        probability: ['#greenButton', '#redButton', '#yellowButton', '#blueButton'],
+        currentPlay: [],
+        player: [],
+        beep: {},
+        gameMode: false
       }
 
       this.changeGreenColor = this.changeGreenColor.bind(this);
@@ -32,10 +38,33 @@ class Simon extends React.Component {
 
       this.reset = this.reset.bind(this);
 
+      this.newRound = this.newRound.bind(this);
+      this.resetRound = this.resetRound.bind(this);
+      this.addCount = this.addCount.bind(this);
+
       this.addToGame = this.addToGame.bind(this);
     }
 
     addToGame(){
+    }
+
+    addCount(){
+      this.setState({
+          totalCount: this.state.totalCount + 1
+      })
+    }
+
+    resetRound(){
+      this.setState({
+          currentPlay: [],
+          totalCount: 0
+      })
+
+      this.addCount();
+    }
+
+    newRound(){
+      this.resetRound();
     }
 
     reset(){
