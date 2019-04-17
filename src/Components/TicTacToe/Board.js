@@ -72,11 +72,7 @@ class Board extends React.Component {
                     {status}
                 </Status>
                 <BoardRow className="noBrdTop">
-                    <Square 
-                        value={this.state.squares[0]}
-                        onClick={() => this.handleClick(0)}
-                        style={{background: 'red'}}
-                    />
+                    {this.renderSquare(0)}
                     {this.renderSquare(1)}
                     {this.renderSquare(2)}
                 </BoardRow>
