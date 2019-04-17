@@ -6,6 +6,7 @@ import styled from "styled-components";
 import notepaperImg from "./Assets/Images/old_mathematics.png";
 // import { fadeZoomIn } from './Shared/animations';
 import MenuInterface from "./Containers/MenuInterface";
+import Trivia from "./Containers/Trivia/Trivia";
 import SideBar from "./Shared/UI/SideBar";
 import HomeIcon from "./Assets/Images/Menu/home_icon_2.svg";
 import LoadingAnimation from "./Shared/UI/LoadingAnimation";
@@ -76,6 +77,7 @@ class App extends Component {
                 {activeDisplay === "menuInterface" && <MenuInterface />}
                 {activeDisplay === "Hangman" && <Hangman />}
                 {activeDisplay === "Snake" && <Snake />}
+                {activeDisplay === "Trivia" && <Trivia />}
             </StateContext.Provider>
         } else content =
         <LoadingAnimation fullHeight>Loading...</LoadingAnimation>
