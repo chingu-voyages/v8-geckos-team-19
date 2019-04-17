@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import styled from 'styled-components';
 import Square from './Square';
 
@@ -15,14 +14,10 @@ const BoardRow = styled.div`
 `
 
 class Board extends React.Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            squares: Array(9).fill(null),
-            xIsNext: true,
-        };
-    }
+    state = {
+        squares: Array(9).fill(null),
+        xIsNext: true,
+    };
 
     handleClick(i) {
         const squares = this.state.squares.slice();

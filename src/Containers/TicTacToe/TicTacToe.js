@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import styled from 'styled-components';
 import Square from '../../Components/TicTacToe/Square';
 import Board from '../../Components/TicTacToe/Board';
