@@ -20,7 +20,7 @@ export default [
         image: snakeImg
     },
     {
-        title: "Trivia Quiz",
+        title: "Trivia",
         descr: "Test your general knowledge by answering the questions from the chosen categories.",
         image: triviaImg
     },

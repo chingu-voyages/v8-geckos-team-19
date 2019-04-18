@@ -37,7 +37,7 @@ export default ({cardSize}) => {
         setAnimateOut(true);
         setTimeout(() => {
             cardClickHandler(next);
-            setAnimateOut(false);
+            // setAnimateOut(false);
             }, 280)
     }
 
