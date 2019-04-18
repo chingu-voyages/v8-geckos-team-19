@@ -1,5 +1,6 @@
 import React, { Component, createContext } from "react";
 import Hangman from "./Containers/Hangman/Hangman";
+import Snake from "./Containers/Snake/Snake";
 import styled from "styled-components";
 // import notepaperImg from "./Assets/Images/note-paper-optimised.svg";
 import notepaperImg from "./Assets/Images/old_mathematics.png";
@@ -75,7 +76,9 @@ class App extends Component {
                     </>}
                 {activeDisplay === "menuInterface" && <MenuInterface />}
                 {activeDisplay === "Hangman" && <Hangman />}
+                {activeDisplay === "Snake" && <Snake />}
                 {activeDisplay === "Tic Tac Toe" && <TicTacToe />}
+
             </StateContext.Provider>
         } else content =
         <LoadingAnimation fullHeight>Loading...</LoadingAnimation>

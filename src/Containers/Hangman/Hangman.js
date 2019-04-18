@@ -39,7 +39,9 @@ const DrawingWindow = styled.div`
     animation: ${animateBorders} 10s ease-in-out infinite;
     margin: 50px;
     box-sizing: border-box;
-    background-color: ${props => props.bgColor};
+    background-image: linear-gradient(135deg, rgba(0,0,255, 0.05) 25%, transparent 25%, transparent 50%, rgba(0,0,255, 0.05) 50%, rgba(0,0,255, 0.05) 75%, transparent 75%, transparent 100%);
+    background-size: 20px 20px;
+    /* background-color: ${props => props.bgColor}; */
     overflow: hidden;
 `
 
