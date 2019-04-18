@@ -51,7 +51,7 @@ export default ({cardSize}) => {
         <MainWindow>
             <h1 style={{margin: 'auto', fontSize: '2.5rem'}}>Game On Geckos</h1>
             <GamesGridWrapper animateOut={animateOut}>
-                {menuData.map((data, idx) => 
+                {menuData.map((data, idx) =>
                 <Card
                     cardSize={cardSize}
                     key={data.title}
@@ -65,4 +65,3 @@ export default ({cardSize}) => {
         </MainWindow>
     )
 }
-

@@ -1,6 +1,7 @@
 import hangmanImg from "../Assets/Images/Menu/hangman.svg";
-import ticTacToeImg from "../Assets/Images/Menu/tic_tac_toe.svg";
+import ticTacToeImg from "../Assets/Images/Menu/Tic_tac_toe.svg";
 import triviaImg from "../Assets/Images/Menu/trivia.svg";
+import simonImg from "../Assets/Images/Menu/simon.svg";
 
 export default [
     {
@@ -16,6 +17,11 @@ export default [
     {
         title: "Trivia Quiz",
         descr: "Test your general knowledge by answering the questions from the chosen categories.",
+        image: triviaImg
+    },
+    {
+        title: "Simon Game",
+        descr: "Test your memory by keeping your answers in sync with randomly selected answers",
         image: triviaImg
     },
 ]
