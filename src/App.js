@@ -10,6 +10,7 @@ import SideBar from "./Shared/UI/SideBar";
 import HomeIcon from "./Assets/Images/Menu/home_icon_2.svg";
 import LoadingAnimation from "./Shared/UI/LoadingAnimation";
 import menuData from "./Data/menuData";
+import TicTacToe from "./Containers/TicTacToe/TicTacToe";
 
 const HomeIcn = styled.button`
     outline: none;
@@ -76,6 +77,8 @@ class App extends Component {
                 {activeDisplay === "menuInterface" && <MenuInterface />}
                 {activeDisplay === "Hangman" && <Hangman />}
                 {activeDisplay === "Snake" && <Snake />}
+                {activeDisplay === "Tic Tac Toe" && <TicTacToe />}
+
             </StateContext.Provider>
         } else content =
         <LoadingAnimation fullHeight>Loading...</LoadingAnimation>
