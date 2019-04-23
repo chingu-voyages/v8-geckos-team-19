@@ -42,6 +42,10 @@ class Simon extends React.Component {
       this.resetRound = this.resetRound.bind(this);
       this.addCount = this.addCount.bind(this);
       this.action = this.action.bind(this);
+      this.startPlaying = this.startPlaying.bind(this);
+      this.clearGamer = this.clearGamer.bind(this);
+      this.addToGamer= this.addToGamer.bind(this);
+      this.playerRound = this.playerRound.bind(this);
 
       this.addToGame = this.addToGame.bind(this);
     }
@@ -89,8 +93,56 @@ class Simon extends React.Component {
       let increment = 0;
 
       let actions = setInterval(function(){
-        // Add actions required
+            this.startPlaying(this.state.currentPlay[increment]);
+            increment++;
+
+            if (increment >= this.state.currentPlay.length)
+            {
+              clearInterval(actions);
+            }
       },800);
+    }
+
+    startPlaying(element){
+      alert('Game has started');
+      // Add light
+      // Add sound
+      // Remove light
+    }
+
+    clearGamer(){
+      this.setState({
+        currentPlay: []
+      })
+    }
+
+    addToGamer(id){
+      let element = "#" + id;
+      alert("Element is " + element);
+      let newArray = this.state.player;
+      newArray.push(id);
+
+      this.playerRound(id);
+
+      alert('Adding');
+    }
+
+    playerRound(i){
+        // alert(this.state.player[this.state.player.length - 1]);
+
+        let length = this.state.player.length - 1;
+        //this.state.player[length];
+        alert(length);
+        alert(this.state.player.length - 1);
+        alert(this.state.player);
+        //console.log(this.state.player);
+
+        // if(this.state.player[this.state.player.length - 1] !== this.state.currentPlay[this.player.length - 1]){
+        //   alert('Try again');
+        // }
+        // else {
+        //   alert('Keep it up');
+        // }
     }
 
     changeGreenColor(){
@@ -128,15 +180,15 @@ class Simon extends React.Component {
     render() {
         return(
           <div className="grid-container">
-            <div className="grid-item"><button id="greenButton" class="simonButton" onClick={this.changeGreenColor} style={{backgroundColor: this.state.greenColor}}>Green</button></div>
+            <div className="grid-item"><button id="greenButton" className="simonButton" onClick={() => {this.addToGamer("greenButton") }} style={{backgroundColor: this.state.greenColor}}>Green</button></div>
             <div className="grid-item"></div>
-            <div className="grid-item"><button id="redButton" class="simonButton" onClick={this.changeRedColor}  style={{backgroundColor: this.state.redColor}}>Red</button></div>
+            <div className="grid-item"><button id="redButton" className="simonButton" onClick={() => {this.addToGamer("redButton") }}  style={{backgroundColor: this.state.redColor}}>Red</button></div>
             <div className="grid-item"></div>
             <div className="grid-item"><div className="centerButton"> Simon </div></div>
             <div className="grid-item"></div>
-            <div className="grid-item"><button id="yellowButton" class="simonButton" onClick={this.changeYellowColor}  style={{backgroundColor: this.state.yellowColor}}>Yellow</button></div>
+            <div className="grid-item"><button id="yellowButton" className="simonButton" onClick={() => {this.addToGamer("yellowButton") }}  style={{backgroundColor: this.state.yellowColor}}>Yellow</button></div>
             <div className="grid-item"></div>
-            <div className="grid-item"><button id="blueButton" class="simonButton" onClick={this.changeBlueColor}  style={{backgroundColor: this.state.blueColor}}>Blue</button></div>
+            <div className="grid-item"><button id="blueButton" className="simonButton" onClick={() => {this.addToGamer("blueButton") }}  style={{backgroundColor: this.state.blueColor}}>Blue</button></div>
           </div>
         );
     }
