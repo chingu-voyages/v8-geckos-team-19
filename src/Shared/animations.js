@@ -166,6 +166,21 @@ export const spin360 = keyframes`
 `;
 //animation: ${spin360} 0.5s cubic-bezier(0.455, 0.030, 0.515, 0.955) both;
 
+export const spin360Shadow = keyframes`
+    0% {
+        transform: rotateY(0);
+        box-shadow: 1px 1px 10px -3px;
+    }
+    50% {
+        box-shadow: none;
+    }
+    100% {
+        transform: rotateY(360deg);
+        box-shadow: 1px 1px 10px -3px;
+    }
+`;
+//animation: ${spin360} 0.5s cubic-bezier(0.455, 0.030, 0.515, 0.955) both;
+
 export const rainbow = keyframes`
     0% {
         color: rgb(255, 79, 79);
@@ -215,4 +230,24 @@ export const jelloVert = keyframes`
         transform: scale3d(1, 1, 1);
     }
 `
+export const pulsate = keyframes`
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.5);
+    }
+    100% {
+        transform: scale(1);
+    }
+`
+
+// export const snakeMove = keyframes`
+//     0% {
+//         margin-top: -50%;
+//         }
+//     100% {
+//         margin-top: 50%;
+//         }
+// `
 // animation: jello-vertical 0.9s both;

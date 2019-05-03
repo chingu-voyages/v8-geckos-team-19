@@ -1,14 +1,17 @@
 import React, { Component, createContext } from "react";
 import Hangman from "./Containers/Hangman/Hangman";
+import Snake from "./Containers/Snake/Snake";
 import styled from "styled-components";
 // import notepaperImg from "./Assets/Images/note-paper-optimised.svg";
 import notepaperImg from "./Assets/Images/old_mathematics.png";
 // import { fadeZoomIn } from './Shared/animations';
 import MenuInterface from "./Containers/MenuInterface";
+import Trivia from "./Containers/Trivia/Trivia";
 import SideBar from "./Shared/UI/SideBar";
 import HomeIcon from "./Assets/Images/Menu/home_icon_2.svg";
 import LoadingAnimation from "./Shared/UI/LoadingAnimation";
 import menuData from "./Data/menuData";
+import TicTacToe from "./Containers/TicTacToe/TicTacToe";
 
 const HomeIcn = styled.button`
     outline: none;
@@ -74,6 +77,9 @@ class App extends Component {
                     </>}
                 {activeDisplay === "menuInterface" && <MenuInterface />}
                 {activeDisplay === "Hangman" && <Hangman />}
+                {activeDisplay === "Snake" && <Snake />}
+                {activeDisplay === "Tic Tac Toe" && <TicTacToe />}
+                {activeDisplay === "Trivia" && <Trivia />}
             </StateContext.Provider>
         } else content =
         <LoadingAnimation fullHeight>Loading...</LoadingAnimation>
